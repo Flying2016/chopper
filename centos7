@@ -226,6 +226,7 @@ cmdList=(
 "installPerl"
 "installRust"
 "open80"
+"clearLog"
 )
 
 select cmd in ${cmdList[@]};
