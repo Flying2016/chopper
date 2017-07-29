@@ -130,8 +130,7 @@ installPerl(){
     mv /usr/bin/perl /usr/bin/perl.bak
     ln -s /usr/local/perl/bin/perl /usr/bin/perl
     perl -v
-    cd ..
-    rmdir ${tempdir}
+    rm -rf ${tempdir} 2>/dev/null
 }
 
 clearLog(){
@@ -210,6 +209,12 @@ initCentos7(){
      installUtils
 }
 
+ceshi(){
+    if [ `perl -v` ];then
+        echo "success"
+    fi
+}
+
 cmdList=(
 "makeEnv"
 "makeAlias"
@@ -227,6 +232,7 @@ cmdList=(
 "installRust"
 "open80"
 "clearLog"
+"ceshi"
 )
 
 select cmd in ${cmdList[@]};
