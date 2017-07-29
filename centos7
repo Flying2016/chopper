@@ -118,8 +118,8 @@ clearLog(){
 
 makeAlias(){
     echo $0
-    echo "alias filter='ls -alh | grep'\n" >> ~/.bashrc
-    echo "alias process='ps -eaf | grep'\n" >> ~/.bashrc
+    echo "alias filter='ls -alh | grep'" >> ~/.bashrc
+    echo "alias process='ps -eaf | grep'" >> ~/.bashrc
     . ~/.bashrc
 }
 
