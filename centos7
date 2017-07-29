@@ -231,6 +231,6 @@ cmdList=(
 
 select cmd in ${cmdList[@]};
 do
-    $("${cmd}")
+    $("${cmd}") 2>/dev/null 1>$1
     exit $?
 done
