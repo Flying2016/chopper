@@ -211,6 +211,7 @@ initCentos7(){
 
 ceshi(){
     perl -v
+    echo $?
     if [ $? -eq 0 ];then
         echo "success"
     fi
