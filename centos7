@@ -199,4 +199,5 @@ cmdList=(
 select cmd in ${cmdList[@]};
 do
     $(${cmd})
+    exit 0
 done
