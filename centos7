@@ -20,13 +20,14 @@ installNode(){
 }
 
 installJava(){
-    echo $0
+    echo "=======install java======="
+    rpm -qa|grep jdk
+
 }
 
 installPython(){
     echo $0
 }
-
 
 installGo(){
     echo $0
@@ -115,25 +116,6 @@ installRust(){
     source ~/.bashrc
 }
 
-
-clearLog(){
-    echo $0
-}
-
-makeAlias(){
-    echo $0
-    echo "alias filter='ls -alh | grep'" >> ~/.bashrc
-    echo "alias process='ps -eaf | grep'" >> ~/.bashrc
-    . ~/.bashrc
-}
-
-open80(){
-    firewall-cmd --zone=public --add-port=80/tcp --permanent
-    firewall-cmd --reload
-    systemctl restart firewalld.service
-}
-
-
 installPerl(){
     cd ~
     tempdir=`mktemp -d ./tmpd.XXXXXX`
@@ -152,6 +134,51 @@ installPerl(){
     rmdir ${tempdir}
 }
 
+clearLog(){
+    echo "======clear log======"
+    declare -i PERCENT=0
+    logFile=(
+        /var/log/syslog
+        /var/adm/sylog
+        /var/log/wtmp
+        /var/log/maillog
+        /var/log/messages
+        /var/log/openwebmail.log
+        /var/log/maillog
+        /var/log/secure
+        /var/log/httpd/error_log
+        /var/log/httpd/ssl_error_log
+        /var/log/httpd/ssl_request_log
+        /var/log/httpd/ssl_access_log
+        ~/.bash_history
+    )
+    (
+        for file in ${logFile[@]};
+        do
+            if [ -f ${file} ];then
+            let PERCENT+=1
+            echo "XXX"
+            echo "clear the file ${file##*/} ..."
+            echo "XXX"
+            echo ${PERCENT}
+            fi
+         done
+    ) | dialog --title "clearing" --gauge "clear the ${file}..." 6 100 0
+
+}
+
+makeAlias(){
+    echo $0
+    echo "alias filter='ls -alh | grep'" >> ~/.bashrc
+    echo "alias process='ps -eaf | grep'" >> ~/.bashrc
+    . ~/.bashrc
+}
+
+open80(){
+    firewall-cmd --zone=public --add-port=80/tcp --permanent
+    firewall-cmd --reload
+    systemctl restart firewalld.service
+}
 
 configureRepo(){
      sudo yum install epel-release
@@ -172,7 +199,6 @@ configureRepo(){
      sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
 }
 
-
 makeEnv(){
        mkdir ~/lab
        mkdir ~/workspace
@@ -183,12 +209,6 @@ initCentos7(){
      makeAlias
      installUtils
 }
-
-
-
-
-
-
 
 cmdList=(
 "makeEnv"
