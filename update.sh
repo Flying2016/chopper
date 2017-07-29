@@ -2,6 +2,6 @@
 while ( true )
 do
     echo "updating ...."
-    git fetch
+    git pull origin master
     sleep 10
 done
