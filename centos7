@@ -6,13 +6,17 @@ installNode(){
     echo "=======install node========"
     rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
     sync
-    sleep 1
-    yum install nginx git -y
+    yum install git -y
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
     . ~/.bashrc
     # 安装node7
     nvm install 7
-    npm install gulp webpack less babel -g
+    # 永久设置npm源为淘宝源
+    npm config set registry http://registry.npm.taobao.org
+    # 更新npm
+    npm install npm -g
+    # 安装常见需要安装的工具
+    npm install PM2 gulp mocha karma jsmine nightwatch jshint node-gyp webpack less babel express-generator -g
 }
 
 installJava(){
@@ -58,7 +62,7 @@ installMysql(){
     systemctl status mysqld
 }
 
-installRabbitmq(){
+installRabbitMq(){
     echo "==========install rabbit mq========="
     echo "http://www.jianshu.com/p/ce725e41edab"
     rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
@@ -129,11 +133,6 @@ open80(){
     systemctl restart firewalld.service
 }
 
-open8080(){
-    firewall-cmd --zone=public --add-port=8080/tcp --permanent
-    firewall-cmd --reload
-    systemctl restart firewalld.service
-}
 
 installPerl(){
     cd ~
@@ -154,10 +153,6 @@ installPerl(){
 }
 
 
-cloneWebSite(){
-    wget -r -p -np -k -P ~/tmp/ $1
-}
-
 configureRepo(){
      sudo yum install epel-release
      wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm | rpm -ivh
@@ -177,6 +172,12 @@ configureRepo(){
      sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
 }
 
+
+makeEnv(){
+       mkdir ~/lab
+       mkdir ~/workspace
+}
+
 initCentos7(){
      configureRepo
      makeAlias
@@ -190,10 +191,21 @@ initCentos7(){
 
 
 cmdList=(
-"installNode"
-"installUtils"
+"makeEnv"
 "makeAlias"
+"configureRepo"
+"installUtils"
+"installNode"
+"installJava"
+"installPython"
+"installGo"
+"installNginx"
+"installMysql"
+"installRabbitMq"
+"installMongodb"
 "installPerl"
+"installRust"
+"open80"
 )
 
 select cmd in ${cmdList[@]};
