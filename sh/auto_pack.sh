@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 自动追加文件，
+# 项目辅助打包工具
 timestamp=$(date)
 title="auto pack system"
 dialog --title "${title}" --msgbox  "current time is  ${timestamp}" 6 60
@@ -37,4 +37,3 @@ cd ../dist/
 svn commit -m "${stamp}"
 
 
-#chown g:u ./src

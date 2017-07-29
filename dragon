@@ -50,7 +50,7 @@ tar xvvf $1 | awk -v s=$s '{ a=a+$3; b=(a/s)*100;printf "%d\n",b}' | dialog --ga
 
 # find the disks
 finDisk(){
-  local cmd="ls /dev/sd*"
+  local cmd="ls /dev/sd?"
   return $(cmd)
 }
 
