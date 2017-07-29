@@ -1,0 +1,202 @@
+#!/usr/bin/env bash
+
+
+
+installNode(){
+    echo "=======install node========"
+    rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    sync
+    sleep 1
+    yum install nginx git -y
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+    . ~/.bashrc
+    # 安装node7
+    nvm install 7
+    npm install gulp webpack less babel -g
+}
+
+installJava(){
+    echo $0
+}
+
+installPython(){
+    echo $0
+}
+
+
+installGo(){
+    echo $0
+}
+
+installNginx(){
+    echo "===============install nginx========="
+    yum install gcc-c++  pcre pcre-devel  zlib zlib-devel  openssl openssl--devel  -y
+    if [ `find -name nginx` ];then
+    yum remove nginx
+    fi
+    yum install nginx -y
+
+    if [ `whereis nginx` ];then
+    echo "success"
+    else
+    echo "install fial!"
+    fi
+    systemctl enbale nginx
+    systemctl daemon-reload
+    systemctl start nginx
+    systemctl status nginx
+    wget "localhost"
+}
+
+installMysql(){
+    echo "============install mysql=============="
+    wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm | rpm -ivh
+    yum install mysql-community-server
+    systemctl enable mysqld
+    systemctl daemon-reload
+    systemctl start mysqld
+    systemctl status mysqld
+}
+
+installRabbitmq(){
+    echo "==========install rabbit mq========="
+    echo "http://www.jianshu.com/p/ce725e41edab"
+    rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+    yum install erlang -y
+    sudo yum install socat -y
+    rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+    rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6-1.el7.noarch.rpm
+    systemctl enable rabbitmq-server
+    systemctl start rabbitmq-server
+    systemctl status rabbitmq-server
+    rabbitmqctl add_user owen owen
+    rabbitmqctl set_permissions -p "/" admin ".*" ".*" ".*"
+    rabbitmqctl set_user_tags admin administrator
+    rabbitmq-plugins enable rabbitmq_management
+    systemctl restart rabbitmq-server
+    firewall-cmd --zone=public --add-port=5672/tcp --permanent
+    firewall-cmd --zone=public --add-port=15672/tcp --permanent
+    firewall-cmd --reload
+    wget http://localhost:15672
+}
+
+installMongodb(){
+    echo "=============install mongodb============"
+    echo "http://www.jianshu.com/p/65c220653afd"
+    repo="[mongodb-org-3.4]
+          name=MongoDB Repository
+          baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
+          gpgcheck=1
+          enabled=1
+          gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc"
+    touch /etc/yum.repos.d/mongodb-org-3.4.repo
+    echo ${repo} > /etc/yum.repos.d/mongodb-org-3.4.repo
+    yum -y install mongodb-org mongodb-org-server
+    systemctl enable mongodb
+    systemctl start mongodb
+    systemctl status mongodb
+}
+
+installUtils(){
+    echo $0
+    yum install htop sshfs mc -y
+    rpm -ivh http://pkgs.repoforge.org/axel/axel-2.4-1.el6.rf.x86_64.rpm
+    yum install axel -y
+    wget http://pkgs.repoforge.org/axel/axel-2.4-1.el6.rf.x86_64.rpm | rpm -ivh
+}
+
+installRust(){
+    echo "=======install rust======="
+    curl https://sh.rustup.rs -sSf | sh
+    source ~/.bashrc
+}
+
+
+clearLog(){
+    echo $0
+}
+
+makeAlias(){
+    echo $0
+    echo "alias filter='ls -alh | grep'\n" >> ~/.bashrc
+    echo "alias process='ps -eaf | grep'\n" >> ~/.bashrc
+    . ~/.bashrc
+}
+
+open80(){
+    firewall-cmd --zone=public --add-port=80/tcp --permanent
+    firewall-cmd --reload
+    systemctl restart firewalld.service
+}
+
+open8080(){
+    firewall-cmd --zone=public --add-port=8080/tcp --permanent
+    firewall-cmd --reload
+    systemctl restart firewalld.service
+}
+
+installPerl(){
+    cd ~
+    tempdir=`mktemp -d ./tmpd.XXXXXX`
+    cd ${tempdir}
+    wget http://www.cpan.org/src/5.0/perl-5.26.0.tar.gz
+    tar -zxvf perl-5.26.0.tar.gz
+    cd perl-5.26.0
+    ./Configure -des -Dprefix=/usr/local/perl
+    make
+    make test
+    make install
+    mv /usr/bin/perl /usr/bin/perl.bak
+    ln -s /usr/local/perl/bin/perl /usr/bin/perl
+    perl -v
+    cd ..
+    rmdir ${tempdir}
+}
+
+
+cloneWebSite(){
+    wget -r -p -np -k -P ~/tmp/ $1
+}
+
+configureRepo(){
+     sudo yum install epel-release
+     wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm | rpm -ivh
+     yum install epel-release -y
+     yum install yum-axelget -y
+     rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+     rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
+
+     cd /etc/yum.repos.d/
+     sudo mv CentOS-Base.repo CentOS-Base.repo.bak
+     wget -O CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+     wget -P /etc/yum.repos.d/  http://mirrors.163.com/.help/CentOS7-Base-163.repo
+     wget -P /etc/yum.repos.d/  http://mirrors.aliyun.com/repo/Centos-7.repo
+     yum clean all
+     yum makecach
+
+     sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
+}
+
+initCentos7(){
+     configureRepo
+     makeAlias
+     installUtils
+}
+
+
+
+
+
+
+
+cmdList=(
+"installNode"
+"installUtils"
+"makeAlias"
+"installPerl"
+)
+
+select cmd in ${cmdList[@]};
+do
+    $(${cmd})
+done
