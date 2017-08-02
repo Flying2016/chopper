@@ -19,7 +19,7 @@ localhost(){
     password="root"
     host="localhost"
     port="3306"
-    repo="dac_mine"
+    repo=""
 }
 
 remote(){
@@ -27,7 +27,7 @@ remote(){
     password="root"
     host="192.168.3.135"
     port="3306"
-    repo="dac_mine"
+    repo=""
 }
 
 
@@ -36,14 +36,14 @@ initRemote(){
     remote
     echo "init database ..."
     echo ${host}
-    create_db_sql="CREATE DATABASE IF NOT EXISTS ${dac} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
-    mysql -h${host} -u${db_username} -p${db_password} -e "${create_db_sql}"
-    mysql -h${host} -u${db_username} -p${db_password} -f  < ./init_db.sql
+    create_db_sql="CREATE DATABASE IF NOT EXISTS ${repo} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
+    mysql -h${host} -u${username} -p${password} -e "${create_db_sql}"
+    mysql -h${host} -u${username} -p${password} -f  < ./init_db.sql
 
     for table in ${tables[@]};
     do
        echo "init ${table}"
-       mysql -h${host} -u${db_username} -p${db_password} -f  < ./data/init_${table}.sql
+       mysql -h${host} -u${username} -p${password} -f  < ./data/init_${table}.sql
     done
 
     echo "init database success！"
@@ -64,23 +64,11 @@ dumpLocalhost(){
 }
 
 declare -r tables=(
-    "system_funmodule"
-    "asset_type"
+    "feature"
     "dictionary"
-    "emergency_plan"
-    "dispose_program"
-    "eventtype"
-    "eventtypecate"
-    "industry"
-    "loophole"
-    "monitor_interface"
-    "monitor_model"
-    "monitor_type"
-    "organization"
-    "zone"
     "user"
     "role"
-    "r_role_module"
+    "r_role_feature"
 )
 
 cmdList=( "dumpLocalhost" "initRemote" "exit" )
