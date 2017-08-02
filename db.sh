@@ -30,8 +30,6 @@ remote(){
     repo=""
 }
 
-
-
 initRemote(){
     remote
     echo "init database ..."
