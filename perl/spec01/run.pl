@@ -3,7 +3,7 @@ use strict;
 use warnings FATAL => 'all';
 use Data::Dumper;
 
-open(DATA, "<file.txt") or die "file.txt 文件无法打开, $!";
+open(DATA, "<./sample.txt") or die "sample.txt 文件无法打开, $!";
 
 my $phData = ();
 my $num = 0;
