@@ -1,64 +1,109 @@
 #!/usr/bin/perl
+use warnings;
 use strict;
-use warnings FATAL => 'all';
-use Data::Dumper;
+use Data::Dumper;;
 
-open(DATA, "<./sample.txt") or die "sample.txt 文件无法打开, $!";
 
-my $phData = ();
+my $szFile = "./cindy.txt";
+if (not -e $szFile) {
+    print "error,the file is not exsit.\n";
+}
+my $outputfile = "DataTime.csv";
+my $FILE_OUT;
+my $FILE_IN;
+open($FILE_IN, "<$szFile");
+open($FILE_OUT, ">$outputfile");
+
+my @lines = ();
+
+
+unless (open $FILE_IN, $szFile) {
+    print "failed to open the File\n";
+}
+
+my @avguploadtime = ();
+my @avgprocesstime = ();
 my $num = 0;
-my $suitName = 0;
 my $index = 0;
 my $flag = 0;
-my $primaryLabel = ();
+my $suiteName = 0;
+my $uploadTime = 0;
+my $primaryLable = 0;
 my %phTimeInfo = ();
-
-while (my $line = <DATA>) {
+my $phData = ();
+my @suitnames = ();
+while (my $line = <$FILE_IN>) {
     chomp($line);
-    if ($line =~ /Executing\s+Test\s+Flow\s+Iteration\s*:\s*(\d+)/) {
+
+    if ($line =~ /Executing\s+Test\s+Flow\s+Loop\s+Iteration\s*:\s*(\d+)/) {
+
         $num = $1;
-        print $num."\n";
+        #        print $num . "\n";
+
     }
-    elsif ($line =~ /Test Suit Name\s\:\s(.*)/) {
-        $suitName = $1;
+    elsif ($line =~ /Test Suite Name\s\:\s(.*)/) {
+
+        push @suitnames, $1;
         $index = 0;
         $flag = 0;
+        #        print $suiteName . "\n";
     }
-    elsif ($line =~ /Primary Label\s*\s*:(.*)/) {
+    elsif ($line =~ /Primary Label\s*:\s*(.*)/) {
         $flag = 1;
         $index++;
-        $primaryLabel = $1;
+        $primaryLable = $1;
     }
     elsif ($line =~ /^--/) {
         $flag = 0;
     }
     if ($flag == 1) {
-        if ($line =~ /Upload Time\s+(.*)msec/) {
-            $phTimeInfo{$num}->{$suitName}->{$index}->{'uploadtime'} = $1;
+
+        if ($line =~ /upload time\s+(.*)\s+msec/) {
+
+            $phTimeInfo{$num}->{$suiteName}->{$index}->{"UPLOADTIME"} = $1;
+
         }
         elsif ($line =~ /process time\s+(.*)\s+msec/) {
-            $phTimeInfo{$num}->{$suitName}->{$index}->{'processtime'} = $1;
+
+            $phTimeInfo{$num}->{$suiteName}->{$index}->{"PROCESSTIME"} = $1;
+
         }
     }
 }
 
-print Dumper \%phTimeInfo;
+#print Dumper \%phTimeInfo;
+#exit;
+foreach $num (sort {$a <=> $b} keys %phTimeInfo) {
+    if ($num != 1) {
+        foreach  $suiteName (@suitnames) {
+            #            print Dumper \%phTimeInfo;
+#            print Dumper \$phTimeInfo{$num};
+            print Dumper keys @phTimeInfo{$num}{$suiteName};
+            #            print Dumper \$suiteName;
+            #            print Dumper \$phTimeInfo{$num}->{$suiteName};
 
-#foreach my $num (sort {$a <=> $b} keys %phTimeInfo) {
-#    if ($num != 1) {
-#        foreach my $suitName (keys %{phTimeInfo{$num}}) {
-#            foreach my $index (sort {$a <=> $b} (keys %{phTimeInfo{$num}->{$suitName}})) {
-#                my $upload = $phTimeInfo{$num}->{$suitName}->{'uploadtime'};
-#                my $process = $phTimeInfo{$num}->{$suitName}->{'pocesstime'};
-#                if (not defined $phData->$suitName->$index) {
-#                    $phData->$suitName->{$index}->{'upload'} = $upload;
-#                    $phData->$suitName->{$index}->{'process'} = $process;
+#            foreach $index (sort {$a <=> $b}  (keys ($phTimeInfo{$num}->{$suiteName}))) {
+#
+#                my $upload = $phTimeInfo{$num}->{$suiteName}->{$index}->{"upload"};
+#                my $process = $phTimeInfo{$num}->{$suiteName}->{$index}->{"process"};
+#
+#                if (not defined $phData->$suiteName->$index) {
+#                    $phData->$suiteName->{$index}->{"upload"} = $upload;
+#                    $phData->$suiteName->{$index}->{"process"} = $process;
+#
 #                }
-#                elsif ($phData->$suitName->$index) {
-#                    $phData->$suitName->{$index}->{'upload'} += $upload;
-#                    $phData->$suitName->{$index}->{'process'} += $process;
+#                elsif ($phData->$suiteName->$index) {
+#                    $phData->$suiteName->{$index}->{"upload"} += $upload;
+#                    $phData->$suiteName->{$index}->{"process"} += $process;
 #                }
+#
 #            }
-#        }
-#    }
-#}
+
+        }
+
+    }
+
+}
+#print Dumper $phData;
+
+
