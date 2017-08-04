@@ -1,3 +1,7 @@
+/**
+ * Input prompt example
+ */
+
 'use strict';
 var inquirer = require('inquirer');
 
@@ -32,42 +36,4 @@ var questions = [
 
 inquirer.prompt(questions).then(function (answers) {
     console.log(JSON.stringify(answers, null, '  '));
-});
-
-inquirer.prompt([
-    {
-        type    : 'checkbox',
-        message : '请选择需要从页面中爬取的元素！',
-        name    : 'target',
-        choices : [
-            new inquirer.Separator(' = 图片 = '),
-            {
-                name: 'png'
-            },
-            {
-                name: 'jpg'
-            },
-            {
-                name: 'gif'
-            },
-            new inquirer.Separator(' = 链接 = '),
-            {
-                name: 'link'
-            },
-            {
-                name: 'ed2k'
-            },
-            {
-                name: 'magnet'
-            }
-        ],
-        validate: (answer) => {
-            if (answer.length < 1) {
-                return '必须选择一种类型！';
-            }
-            return true;
-        }
-    }
-]).then(function (answers) {
-
 });
