@@ -5,7 +5,7 @@
 
 class Spider {
     constructor(url) {
-        this.url  = url;
+        this.url = url;
         this.pool = [];
     }
 
@@ -14,6 +14,10 @@ class Spider {
     }
 
     run() {
+
+    }
+
+    download() {
 
     }
 

@@ -1,14 +1,13 @@
 /**
  * Created by owen-carter on 17/8/4.
  */
-var http    = require('http');
-var fs      = require('fs');
+var http = require('http');
+var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
-var i       = 0;
-var url     = "http://www.ss.pku.edu.cn/index.php/newscenter/news/2391";
-//初始url
-
+var i = 0;
+var url = "http://www.ss.pku.edu.cn/index.php/newscenter/news/2391";
+// 初始url
 function fetchPage(x) {     //封装了一层函数
     startRequest(x);
 }
@@ -17,7 +16,7 @@ function fetchPage(x) {     //封装了一层函数
 function startRequest(x) {
     //采用http模块向服务器发起一次get请求
     http.get(x, function (res) {
-        var html   = '';        //用来存储请求网页的整个html内容
+        var html = '';        //用来存储请求网页的整个html内容
         var titles = [];
         res.setEncoding('utf-8'); //防止中文乱码
         //监听data事件，每次取一块数据
@@ -33,15 +32,15 @@ function startRequest(x) {
 
             var news_item = {
                 //获取文章的标题
-                title : $('div.article-title a').text().trim(),
+                title: $('div.article-title a').text().trim(),
                 //获取文章发布的时间
-                Time  : time,
+                Time: time,
                 //获取当前文章的url
-                link  : "http://www.ss.pku.edu.cn" + $("div.article-title a").attr('href'),
+                link: "http://www.ss.pku.edu.cn" + $("div.article-title a").attr('href'),
                 //获取供稿单位
                 author: $('[title=供稿]').text().trim(),
                 //i是用来判断获取了多少篇文章
-                i     : i = i + 1,
+                i: i = i + 1,
 
             };
 
@@ -55,8 +54,8 @@ function startRequest(x) {
 
             //下一篇文章的url
             var nextLink = "http://www.ss.pku.edu.cn" + $("li.next a").attr('href');
-            str1         = nextLink.split('-');  //去除掉url后面的中文
-            str          = encodeURI(str1[0]);
+            str1 = nextLink.split('-');  //去除掉url后面的中文
+            str = encodeURI(str1[0]);
             //这是亮点之一，通过控制I,可以控制爬取多少篇文章.
             if (i <= 500) {
                 fetchPage(str);
