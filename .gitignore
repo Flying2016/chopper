@@ -1,3 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 node/spider/node_modules/
+/.vscode/
