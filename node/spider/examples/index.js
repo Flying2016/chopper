@@ -1,41 +1,19 @@
 /**
  * Created by owen on 2017/8/5.
  */
-var fs = require('fs');
-var request = require("request");
-var cheerio = require("cheerio");
-var mkdirp = require('mkdirp');
-var path = require('path');
-var http = require("http");
-var log4js = require('log4js');
-var async = require('async');
-var cluster = require('cluster');
-var numCPUs = require('os').cpus().length;
+const fs = require('fs');
+const request = require("request");
+const cheerio = require("cheerio");
+const mkdirp = require('mkdirp');
+const path = require('path');
+const http = require("http");
+const log4js = require('log4js');
+const async = require('async');
+const cluster = require('cluster');
+const numCpus = require('os').cpus().length;
+const child_process = require('child_process');
+const x = child_process.fork(`${__dirname}/worker/parse.js`);
 
-
-class Logger {
-    constructor() {
-        this.engine = console;
-    }
-
-    log(e) {
-        this.engine.log(e)
-    }
-
-    dir(e) {
-        this.engine.dir(e)
-    }
-
-    error(e) {
-        this.engine.log(e)
-    }
-}
-
-class Store {
-    constructor() {
-
-    }
-}
 
 class Spider {
     constructor(seedUrl, storePath = './images/') {
@@ -43,9 +21,13 @@ class Spider {
         this.storePath = storePath;
         this.urlPool = [];
         this.ruleMap = {};
-        this.logger = (new Logger());
     }
 
+    /***
+     * 可以初始化应用
+     * 启动各个进程
+     * @returns {Spider}
+     */
     init() {
         this.urlPool.push(this.seedUrl);
         mkdirp(this.storePath, function (err) {
@@ -56,11 +38,19 @@ class Spider {
         return this;
     }
 
+    /***
+     * scheduler ？添加url
+     * @param url
+     */
     addUrl(url) {
         this.urlPool.push(url);
     }
 
 
+    /***
+     * 可以做成一个进程
+     * @param url
+     */
     fetch(url) {
         //发送请求
         request(url, (error, response, body) => {
@@ -73,6 +63,11 @@ class Spider {
         });
     }
 
+    /***
+     * 将这个做成一个进程
+     * @param url
+     * @param html
+     */
     parse(url, html) {
         this.logger.log('开始解析！');
         let $ = cheerio.load(html);
@@ -80,42 +75,59 @@ class Spider {
         $('a').each(function () {
             let href = $(this).attr('href');
             if (href.split('/').pop().indexOf('.') !== -1) {
-                instance.logger.log(`加入url队列 ${href}`);
+                instance.logger.log(`加入爬行队列 ${href}`);
                 instance.addUrl(href)
             }
         });
         $('img').each(function () {
             let src = $(this).attr('src');
             let filename = src.split('/').pop();
-            instance.logger.log(`加入下载文件：图片队列 ${src}`);
+            instance.logger.log(`加入下载文件： ${src}`);
             instance.download(src, instance.storePath, filename);
         });
     }
 
-    download(url, _path, filename) {
-        this.logger.log(`开始下载 ${url}`);
-        http.get(url, (res) => {
-            let imgData = "";
-            res.setEncoding("binary")
-                .on("data", (chunk) => {
-                    imgData += chunk;
-                })
-                .on("end", () => {
-                    fs.writeFile(`${this.storePath}${filename}`, imgData, "binary", function (err) {
-                        if (err) {
-                            console.log("down fail");
-                        }
-                        console.log("down success");
-                    });
-                });
+    store(_path, _filename, data) {
+        fs.writeFile(`${_path}${_filename}`, data, "binary", function (err) {
+            if (err) {
+                console.log(`store ${_filename} fail`);
+            }
+            console.log(`store ${_filename} success`);
         });
     }
 
+    /***
+     * 一个下载方法可以作为工具类
+     * 同时还应该补充许多
+     * @param url
+     * @param _path
+     * @param filename
+     */
+    download(url, _path, filename) {
+        this.logger.log(`开始下载 ${url}`);
+        try {
+            http.get(url, (res) => {
+                let imgData = "";
+                res.setEncoding("binary")
+                    .on("data", (chunk) => {
+                        imgData += chunk;
+                    })
+                    .on("end", () => {
+                        this.store(this.storePath, filename, imgData)
+                    });
+            });
 
-    rules() {
-
+        } catch (e) {
+            throw new Error(10, "download error")
+        }
     }
 
+    /***
+     * 添加规则
+     * @param ruleName
+     * @param ruleFn
+     * @returns {Spider}
+     */
     register(ruleName, ruleFn) {
         if (!ruleName || !ruleFn) {
             this.logger.error('注册规则失败');
@@ -135,16 +147,14 @@ class Spider {
 
 }
 
-//
-// (new Spider('http://www.mzitu.com/zipai/'))
-//     .init()
-//     .run();
 
-const child_process = require('child_process');
-const x = child_process.fork(`${__dirname}/worker/parse.js`);
+(new Spider('http://www.mzitu.com/zipai/'))
+    .init()
+    .run();
 
-x.on('message', (m) => {
-    console.log('PARENT got message:', m);
+
+x.on('message', (data) => {
+    console.log('PARENT got message:', data);
 });
 
 x.send({hello: 'world'});

@@ -1,10 +1,11 @@
 #!/usr/bin/env perl
+
 use warnings;
 use strict;
 use Data::Dumper;;
 
 
-my $szFile = "/c/Users/owen/Documents/workspace/sh_utils/perl/spec01/sample.txt";
+my $szFile = "/c/Users/owen/Documents/workspace/sh_utils/perl/spec01/cindy.txt";
 if (not -e $szFile) {
     print "error,the file is not exsit.\n";
 }
@@ -79,33 +80,35 @@ while (my $line = <$FILE_IN>) {
         # 如果这行是 upload time
         if ($line =~ /upload time\s+(.*)\s+msec/) {
             # 将时间推入哈希
-            print "推upload进哈希 \n";
-            print ''.$suiteName.'\n';
+            #            print "推upload进哈希 \n";
+            #            print ''.$suiteName.'\n';
             $container{$loopName.''}->{''.$suiteName.''}->{$blockIndex}->{"UPLOADTIME"} = $1;
         }
         # 如果这行是 start time
         if ($line =~ /process time\s+(.*)\s+msec/) {
             # 将时间推入哈希
-            print "推process进哈希 \n";
-            print ''.$suiteName.'\n';
+            #            print "推process进哈希 \n";
+            #            print ''.$suiteName.'\n';
             $container{$loopName.''}->{''.$suiteName.''}->{$blockIndex}->{"PROCESSTIME"} = $1;
         }
     }
 }
 
-print Dumper \%container;
-print Dumper \@suitNames;
+#print Dumper \%container;
+#print Dumper \@suitNames;
 
 
 # build suitNames
 my $suiteNameLen = @suitNames;
-#for (my $i = 0; $i < $suiteNameLen; $i++)
-#{
-#    if ($suitNames[$i] eq $suitNames[0])
-#    {
-#        @suitNames = @suitNames[0 .. $i + 1]
-#    }
-#}
+my @sameIndexs = qw();
+for (my $i = 1; $i < $suiteNameLen; $i++)
+{
+    if ($suitNames[$i] eq $suitNames[0])
+    {
+        push @sameIndexs, $i;
+    }
+}
+@suitNames = @suitNames[0 .. $sameIndexs[0] - 1];
 
 print Dumper @suitNames;
 
@@ -115,6 +118,7 @@ my @_loopnames = sort {$a <=> $b} (keys %container);
 shift @_loopnames;
 # 分子=5
 my $down = @_loopnames;
+print Dumper \@_loopnames;
 
 # 表格
 my %table = ();
@@ -129,17 +133,20 @@ foreach my $_suitName (@suitNames) {
     # 制造一个容器，使得在子循环可以填充该容器，并在子循环结束，可以被收集
     my @blockList = qw();
     foreach my $_loopname (@_loopnames) {
+        print  "loop:";
         print  $_loopname;
-        print Dumper \$container{$_loopname}{$_suitName};
+        print  "\n";
+        #        print Dumper \$container{$_loopname}{$_suitName};
         # 循环block次数
         # 制作一个哈希容器，在子循环中收集两个时间，并且在，结束时候，可以被收集
         my %unit = qw();
         my $uploadT = 0;
         my $processT = 0;
         foreach my $_blk (sort {$a <=> $b} keys $container{$_loopname}{$_suitName}) {
-            print $_blk."\n";
-            print Dumper \$container{$_loopname}{$_suitName}{$_blk}{'PROCESSTIME'};
-            print Dumper \$container{$_loopname}{$_suitName}{$_blk}{'UPLOADTIME'};
+            #            print $_blk."\n";
+            #            print Dumper \$container{$_loopname}{$_suitName}{$_blk}{'PROCESSTIME'};
+            #            print Dumper \$container{$_loopname}{$_suitName}{$_blk}{'UPLOADTIME'};
+            print "[block]".$_blk."\n";
             $uploadT += $container{$_loopname}{$_suitName}{$_blk}{'UPLOADTIME'};
             $processT += $container{$_loopname}{$_suitName}{$_blk}{'PROCESSTIME'};
 
@@ -147,6 +154,7 @@ foreach my $_suitName (@suitNames) {
         # 收集两个时间
         $unit{'UPLOADTIME'} = $uploadT / $down;
         $unit{'PROCESSTIME'} = $processT / $down;
+        #        print Dumper \%unit;
         push @blockList, \%unit;
         #        print "*****************\n";
     }
@@ -156,15 +164,12 @@ foreach my $_suitName (@suitNames) {
 
 print "%%%%%%%%%%%%%%%%%%%%% 结束计算  %%%%%%%%%%%%%%%%%%%%%%%%%%\n";
 print Dumper \%table;
-
 print "%%%%%%%%%%%%%%%%%%%%% 确认结果 %%%%%%%%%%%%%%%%%%%%%%%%%%\n";
 
-#my $len = keys %table;
-#print 'suit的数量：'.$len;
+my $len = keys %table;
+print 'suit的数量：'.$len;
 
 
 
 
-print Dumper @suitNames;
 
-print "jft";
