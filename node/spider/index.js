@@ -7,13 +7,9 @@ const cheerio = require("cheerio");
 const mkdirp = require('mkdirp');
 const path = require('path');
 const http = require("http");
-const log4js = require('log4js');
-const async = require('async');
-const cluster = require('cluster');
-const numCpus = require('os').cpus().length;
 const child_process = require('child_process');
-const x = child_process.fork(`${__dirname}/worker/parse.js`);
-
+const numCpus = require('os').cpus().length;
+const logger = require('./utils/log.js');
 
 class Spider {
     constructor(seedUrl, storePath = './images/') {
@@ -21,6 +17,7 @@ class Spider {
         this.storePath = storePath;
         this.urlPool = [];
         this.ruleMap = {};
+        this.parse = null;
     }
 
     /***
@@ -32,9 +29,12 @@ class Spider {
         this.urlPool.push(this.seedUrl);
         mkdirp(this.storePath, function (err) {
             if (err) {
-                console.log(err);
+                // logger.error(err)
             }
         });
+
+        // this.parse = child_process.fork(`./lib/parse.js`);
+        // this.listen();
         return this;
     }
 
@@ -55,10 +55,11 @@ class Spider {
         //发送请求
         request(url, (error, response, body) => {
             if (!error && response.statusCode == 200) {
-                this.logger.log(`download ${url} is successful!`);
+                // logger.info(`download ${url} is successful!`);
+                console.dir('parse')
                 this.parse(url, body);
             } else {
-                this.logger.log(error);
+                // logger.info(error);
             }
         });
     }
@@ -69,20 +70,20 @@ class Spider {
      * @param html
      */
     parse(url, html) {
-        this.logger.log('开始解析！');
+        // logger.info('开始解析！');
         let $ = cheerio.load(html);
         let instance = this;
         $('a').each(function () {
             let href = $(this).attr('href');
             if (href.split('/').pop().indexOf('.') !== -1) {
-                instance.logger.log(`加入爬行队列 ${href}`);
+                // logger.info(`加入爬行队列 ${href}`);
                 instance.addUrl(href)
             }
         });
         $('img').each(function () {
             let src = $(this).attr('src');
             let filename = src.split('/').pop();
-            instance.logger.log(`加入下载文件： ${src}`);
+            // logger.info(`加入下载文件： ${src}`);
             instance.download(src, instance.storePath, filename);
         });
     }
@@ -90,9 +91,9 @@ class Spider {
     store(_path, _filename, data) {
         fs.writeFile(`${_path}${_filename}`, data, "binary", function (err) {
             if (err) {
-                console.log(`store ${_filename} fail`);
+                // logger.error(`store ${_filename} fail`);
             }
-            console.log(`store ${_filename} success`);
+            // logger.info(`store ${_filename} success`);
         });
     }
 
@@ -104,7 +105,7 @@ class Spider {
      * @param filename
      */
     download(url, _path, filename) {
-        this.logger.log(`开始下载 ${url}`);
+        // logger.info(`开始下载 ${url}`);
         try {
             http.get(url, (res) => {
                 let imgData = "";
@@ -122,27 +123,23 @@ class Spider {
         }
     }
 
-    /***
-     * 添加规则
-     * @param ruleName
-     * @param ruleFn
-     * @returns {Spider}
-     */
-    register(ruleName, ruleFn) {
-        if (!ruleName || !ruleFn) {
-            this.logger.error('注册规则失败');
-            throw "注册规则失败";
-        }
-        this.ruleMap[ruleName] = ruleFn;
-        return this;
+    listen() {
+        this.parse.on('message', (data) => {
+            console.log('PARENT got message:', data);
+        });
+    }
+
+    send(message = {}) {
+        this.parse.send(message);
     }
 
 
     run() {
+        // logger.debug('pool is empty,so exit');
         while (this.urlPool.length) {
             this.fetch(this.urlPool.shift())
         }
-        this.logger.log('pool is empty,so exit');
+        // logger.info('pool is empty,so exit');
     }
 
 }
@@ -153,8 +150,3 @@ class Spider {
     .run();
 
 
-x.on('message', (data) => {
-    console.log('PARENT got message:', data);
-});
-
-x.send({hello: 'world'});

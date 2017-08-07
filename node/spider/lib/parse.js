@@ -27,7 +27,7 @@ class Parser {
     run() {
         setInterval(() => {
             Parser.send('jft')
-        }, 1000)
+        }, 5000)
     }
 }
 
