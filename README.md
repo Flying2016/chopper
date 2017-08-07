@@ -1,3 +1,3 @@
-# sh_utils
+# chopper
 
 this is my shell utils collection.
