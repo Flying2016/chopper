@@ -92,19 +92,30 @@ class Spider {
         logger.info('开始解析！');
         let $        = cheerio.load(html);
         let instance = this;
-        $('a').each(function () {
-            let href = $(this).attr('href');
-            if (href.split('/').pop().indexOf('.') !== -1) {
-                logger.info(`加入爬行队列 ${href}`);
-                instance.addUrl(href)
-            }
-        });
-        $('img').each(function () {
-            let src      = $(this).attr('src');
-            let filename = src.split('/').pop();
-            logger.info(`加入下载文件： ${src}`);
-            instance.download(src, instance.storePath, filename);
-        });
+
+
+        try {
+            $('a').each(function () {
+                let href = $(this).attr('href');
+                if (href.split('/').pop().indexOf('.') !== -1) {
+                    logger.info(`加入爬行队列 ${href}`);
+                    instance.addUrl(href)
+                }
+            });
+        } catch (e) {
+            logger.error(`出错了： ${e}`);
+        }
+
+        try {
+            $('img').each(function () {
+                let src      = $(this).attr('src');
+                let filename = src.split('/').pop();
+                logger.info(`加入下载文件： ${src}`);
+                instance.download(src, instance.storePath, filename);
+            });
+        } catch (e) {
+            logger.error(`出错了： ${e}`);
+        }
     }
 
     /***
@@ -164,15 +175,18 @@ class Spider {
 
     run() {
         logger.info('start to crawl.....');
-        while (this.urlPool.length) {
-            this.fetch(this.urlPool.shift())
-        }
+        this.fetch(this.urlPool.shift())
+        setInterval(() => {
+            if (this.urlPool.length !== 0) {
+                this.fetch(this.urlPool.shift())
+            }
+        }, (60 * 1000 ) * 5)
     }
 
 }
 
 
-(new Spider('http://www.mzitu.com/zipai/'))
+(new Spider('http://www.mzitu.com/'))
     .init()
     .run();
 
