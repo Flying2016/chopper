@@ -120,7 +120,7 @@ class Spider {
     }
 
     /***
-     * 储存图片
+     * 储存图片转到下载中心
      * @param _path
      * @param _filename
      * @param data
