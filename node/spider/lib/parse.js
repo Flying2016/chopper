@@ -2,7 +2,7 @@
  * Created by owen on 2017/8/6.
  */
 
-const log4js  = require('log4js');
+const log4js = require('log4js');
 const cheerio = require("cheerio");
 
 class Parser {
@@ -29,11 +29,12 @@ class Parser {
 
     parse(url, html) {
         console.log('分析进程开始解析！');
-        let $        = cheerio.load(html);
+        let $ = cheerio.load(html);
         let instance = this;
         $('a').each(function () {
             let href = $(this).attr('href');
-            if (href.split('/').pop().indexOf('.') !== -1) {
+            let suffix = href.split('/').pop();
+            if (suffix && suffix.indexOf('.') !== -1) {
                 console.log(`分析进程发现可用url ${href}`);
                 Parser.send(href)
             } else {

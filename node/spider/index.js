@@ -1,13 +1,13 @@
 /**
  * Created by owen on 2017/8/5.
  */
-const fs            = require('fs');
-const http          = require("http");
-const path          = require('path');
-const mkdirp        = require('mkdirp');
-const log4js        = require('log4js');
-const request       = require("request");
-const cheerio       = require("cheerio");
+const fs = require('fs');
+const http = require("http");
+const path = require('path');
+const mkdirp = require('mkdirp');
+const log4js = require('log4js');
+const request = require("request");
+const cheerio = require("cheerio");
 const child_process = require('child_process');
 
 
@@ -15,13 +15,13 @@ log4js.configure({
     categories: {
         default: {
             appenders: ['spider', 'out'],
-            level    : 'info'
+            level: 'info'
         }
     },
-    appenders : {
-        out   : {type: 'stdout'},
+    appenders: {
+        out: {type: 'stdout'},
         spider: {
-            type    : 'file',
+            type: 'file',
             filename: './spider.log'
         }
     }
@@ -31,11 +31,11 @@ const logger = log4js.getLogger('spider');
 
 class Spider {
     constructor(seedUrl, storePath = './images/') {
-        this.seedUrl   = seedUrl;
+        this.seedUrl = seedUrl;
         this.storePath = storePath;
-        this.urlPool   = [];
-        this.ruleMap   = {};
-        this.cp        = null;
+        this.urlPool = [];
+        this.ruleMap = {};
+        this.cp = null;
     }
 
     /***
@@ -90,14 +90,15 @@ class Spider {
      */
     parse(url, html) {
         logger.info('开始解析！');
-        let $        = cheerio.load(html);
+        let $ = cheerio.load(html);
         let instance = this;
 
 
         try {
             $('a').each(function () {
                 let href = $(this).attr('href');
-                if (href.split('/').pop().indexOf('.') !== -1) {
+                let suffix = href.split('/').pop();
+                if (suffix && suffix.indexOf('.') !== -1) {
                     logger.info(`加入爬行队列 ${href}`);
                     instance.addUrl(href)
                 }
@@ -108,7 +109,7 @@ class Spider {
 
         try {
             $('img').each(function () {
-                let src      = $(this).attr('src');
+                let src = $(this).attr('src');
                 let filename = src.split('/').pop();
                 logger.info(`加入下载文件： ${src}`);
                 instance.download(src, instance.storePath, filename);
