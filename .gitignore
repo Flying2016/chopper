@@ -2,3 +2,4 @@
 .idea/
 node/spider/node_modules/
 /.vscode/
+.DS_Store
