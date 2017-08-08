@@ -16,7 +16,7 @@ class Parser {
     static pack(message) {
         return {
             version: '',
-            data: message
+            data   : message
         };
     }
 
@@ -32,3 +32,4 @@ class Parser {
 }
 
 (new Parser()).init().run();
+

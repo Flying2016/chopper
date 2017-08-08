@@ -1,23 +1,41 @@
 /**
  * Created by owen on 2017/8/5.
  */
-const fs = require('fs');
-const request = require("request");
-const cheerio = require("cheerio");
-const mkdirp = require('mkdirp');
-const path = require('path');
-const http = require("http");
+const fs            = require('fs');
+const http          = require("http");
+const path          = require('path');
+const mkdirp        = require('mkdirp');
+const log4js        = require('log4js');
+const request       = require("request");
+const cheerio       = require("cheerio");
 const child_process = require('child_process');
-const numCpus = require('os').cpus().length;
-const logger = require('./utils/log.js');
+
+
+log4js.configure({
+    categories: {
+        default: {
+            appenders: ['spider', 'out'],
+            level    : 'info'
+        }
+    },
+    appenders : {
+        out   : {type: 'stdout'},
+        spider: {
+            type    : 'file',
+            filename: './spider.log'
+        }
+    }
+});
+
+const logger = log4js.getLogger('spider');
 
 class Spider {
     constructor(seedUrl, storePath = './images/') {
-        this.seedUrl = seedUrl;
+        this.seedUrl   = seedUrl;
         this.storePath = storePath;
-        this.urlPool = [];
-        this.ruleMap = {};
-        this.parse = null;
+        this.urlPool   = [];
+        this.ruleMap   = {};
+        this.cp        = null;
     }
 
     /***
@@ -29,12 +47,13 @@ class Spider {
         this.urlPool.push(this.seedUrl);
         mkdirp(this.storePath, function (err) {
             if (err) {
-                // logger.error(err)
+                logger.error(err)
             }
         });
 
-        // this.parse = child_process.fork(`./lib/parse.js`);
-        // this.listen();
+        // 目标把这个作为解析进程或者爬行的子进程，进一步学习多进程通信
+        this.cp = child_process.fork(`./lib/parse.js`);
+        this.listen();
         return this;
     }
 
@@ -48,18 +67,17 @@ class Spider {
 
 
     /***
-     * 可以做成一个进程
+     * 可以做成一个进程，爬行进程
      * @param url
      */
     fetch(url) {
         //发送请求
         request(url, (error, response, body) => {
             if (!error && response.statusCode == 200) {
-                // logger.info(`download ${url} is successful!`);
-                console.dir('parse')
+                logger.info(`download ${url} is successful!`);
                 this.parse(url, body);
             } else {
-                // logger.info(error);
+                logger.error(error);
             }
         });
     }
@@ -70,42 +88,48 @@ class Spider {
      * @param html
      */
     parse(url, html) {
-        // logger.info('开始解析！');
-        let $ = cheerio.load(html);
+        logger.info('开始解析！');
+        let $        = cheerio.load(html);
         let instance = this;
         $('a').each(function () {
             let href = $(this).attr('href');
             if (href.split('/').pop().indexOf('.') !== -1) {
-                // logger.info(`加入爬行队列 ${href}`);
+                logger.info(`加入爬行队列 ${href}`);
                 instance.addUrl(href)
             }
         });
         $('img').each(function () {
-            let src = $(this).attr('src');
+            let src      = $(this).attr('src');
             let filename = src.split('/').pop();
-            // logger.info(`加入下载文件： ${src}`);
+            logger.info(`加入下载文件： ${src}`);
             instance.download(src, instance.storePath, filename);
         });
     }
 
+    /***
+     * 储存图片
+     * @param _path
+     * @param _filename
+     * @param data
+     */
     store(_path, _filename, data) {
         fs.writeFile(`${_path}${_filename}`, data, "binary", function (err) {
             if (err) {
-                // logger.error(`store ${_filename} fail`);
+                logger.error(`store ${_filename} fail`);
             }
-            // logger.info(`store ${_filename} success`);
+            logger.info(`store ${_filename} success`);
         });
     }
 
     /***
      * 一个下载方法可以作为工具类
-     * 同时还应该补充许多
+     * 同时还应该补充许多别的共有方法
      * @param url
      * @param _path
      * @param filename
      */
     download(url, _path, filename) {
-        // logger.info(`开始下载 ${url}`);
+        logger.info(`开始下载 ${url}`);
         try {
             http.get(url, (res) => {
                 let imgData = "";
@@ -119,27 +143,26 @@ class Spider {
             });
 
         } catch (e) {
-            throw new Error(10, "download error")
+            logger.error('download error', e);
         }
     }
 
     listen() {
-        this.parse.on('message', (data) => {
-            console.log('PARENT got message:', data);
+        this.cp.on('message', (data) => {
+            logger.info('PARENT process got message from cp:', data);
         });
     }
 
     send(message = {}) {
-        this.parse.send(message);
+        this.cp.send(message);
     }
 
 
     run() {
-        // logger.debug('pool is empty,so exit');
+        logger.info('start to crawl.....');
         while (this.urlPool.length) {
             this.fetch(this.urlPool.shift())
         }
-        // logger.info('pool is empty,so exit');
     }
 
 }

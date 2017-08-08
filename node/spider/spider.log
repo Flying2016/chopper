@@ -1,0 +1,256 @@
+[2017-08-08 09:43:16.365] [INFO] spider - start to crawl.....
+[2017-08-08 09:43:16.417] [INFO] spider - download http://www.mzitu.com/zipai/ is successful!
+[2017-08-08 09:43:16.418] [INFO] spider - 开始解析！
+[2017-08-08 09:43:16.489] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilha8g5j20ia0wiady.jpg
+[2017-08-08 09:43:16.489] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilha8g5j20ia0wiady.jpg
+[2017-08-08 09:43:16.491] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhbcylj20k80qwael.jpg
+[2017-08-08 09:43:16.491] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhbcylj20k80qwael.jpg
+[2017-08-08 09:43:16.492] [INFO] spider - 加入下载文件： http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibilh9hiej20fa0m8q4u.jpg
+[2017-08-08 09:43:16.492] [INFO] spider - 开始下载 http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibilh9hiej20fa0m8q4u.jpg
+[2017-08-08 09:43:16.493] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilheqpej20h00piwij.jpg
+[2017-08-08 09:43:16.493] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilheqpej20h00piwij.jpg
+[2017-08-08 09:43:16.493] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhe4ckj20k80zzn1g.jpg
+[2017-08-08 09:43:16.494] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhe4ckj20k80zzn1g.jpg
+[2017-08-08 09:43:16.494] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibili1vw1j20k80qzjvb.jpg
+[2017-08-08 09:43:16.494] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibili1vw1j20k80qzjvb.jpg
+[2017-08-08 09:43:16.495] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhytwgj20k80qygp2.jpg
+[2017-08-08 09:43:16.495] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhytwgj20k80qygp2.jpg
+[2017-08-08 09:43:16.496] [INFO] spider - 加入下载文件： http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibili3n02j20k80qz788.jpg
+[2017-08-08 09:43:16.496] [INFO] spider - 开始下载 http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibili3n02j20k80qz788.jpg
+[2017-08-08 09:43:16.498] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhyt00j20k80qyjwm.jpg
+[2017-08-08 09:43:16.498] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhyt00j20k80qyjwm.jpg
+[2017-08-08 09:43:16.499] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/85264_14b44_115.jpg
+[2017-08-08 09:43:16.499] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/85264_14b44_115.jpg
+[2017-08-08 09:43:16.499] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/86048_23b11_115.jpg
+[2017-08-08 09:43:16.499] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/86048_23b11_115.jpg
+[2017-08-08 09:43:16.500] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/03/87541_12b28_115.jpg
+[2017-08-08 09:43:16.500] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/03/87541_12b28_115.jpg
+[2017-08-08 09:43:16.501] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/85480_17b30_115.jpg
+[2017-08-08 09:43:16.502] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/85480_17b30_115.jpg
+[2017-08-08 09:43:16.502] [INFO] spider - 加入下载文件： http://i.meizitu.net/pfiles/img/footer.gif
+[2017-08-08 09:43:16.502] [INFO] spider - 开始下载 http://i.meizitu.net/pfiles/img/footer.gif
+[2017-08-08 09:43:21.057] [INFO] spider - store 9d52c073gy1fibilh9hiej20fa0m8q4u.jpg success
+[2017-08-08 09:43:21.057] [INFO] spider - store 9d52c073gy1fibilhytwgj20k80qygp2.jpg success
+[2017-08-08 09:43:21.058] [INFO] spider - store 9d52c073gy1fibili3n02j20k80qz788.jpg success
+[2017-08-08 09:43:21.058] [INFO] spider - store 9d52c073gy1fibilha8g5j20ia0wiady.jpg success
+[2017-08-08 09:43:21.058] [INFO] spider - store 9d52c073gy1fibilheqpej20h00piwij.jpg success
+[2017-08-08 09:43:21.058] [INFO] spider - store 9d52c073gy1fibilhe4ckj20k80zzn1g.jpg success
+[2017-08-08 09:43:21.059] [INFO] spider - store 9d52c073gy1fibili1vw1j20k80qzjvb.jpg success
+[2017-08-08 09:43:21.059] [INFO] spider - store 9d52c073gy1fibilhyt00j20k80qyjwm.jpg success
+[2017-08-08 09:43:21.059] [INFO] spider - store 9d52c073gy1fibilhbcylj20k80qwael.jpg success
+[2017-08-08 09:43:21.130] [INFO] spider - store footer.gif success
+[2017-08-08 09:43:21.130] [INFO] spider - store 85264_14b44_115.jpg success
+[2017-08-08 09:43:21.131] [INFO] spider - store 87541_12b28_115.jpg success
+[2017-08-08 09:43:21.131] [INFO] spider - store 85480_17b30_115.jpg success
+[2017-08-08 09:43:21.131] [INFO] spider - store 86048_23b11_115.jpg success
+[2017-08-08 09:43:21.444] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:43:26.445] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:43:31.447] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:43:36.453] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:43:41.455] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:43:46.458] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:43:51.462] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:43:56.463] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:01.465] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:06.467] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:11.468] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:16.471] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:21.471] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:26.473] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:31.477] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:36.481] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:41.482] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:46.486] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:51.488] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:44:56.489] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:01.491] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:06.492] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:11.496] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:16.497] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:21.501] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:26.503] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:31.503] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:36.503] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:41.505] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:46.508] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:45:51.508] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:51:34.885] [INFO] spider - start to crawl.....
+[2017-08-08 09:51:36.326] [INFO] spider - download http://www.mzitu.com/zipai/ is successful!
+[2017-08-08 09:51:36.327] [INFO] spider - 开始解析！
+[2017-08-08 09:51:36.401] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilha8g5j20ia0wiady.jpg
+[2017-08-08 09:51:36.401] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilha8g5j20ia0wiady.jpg
+[2017-08-08 09:51:36.404] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhbcylj20k80qwael.jpg
+[2017-08-08 09:51:36.404] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhbcylj20k80qwael.jpg
+[2017-08-08 09:51:36.405] [INFO] spider - 加入下载文件： http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibilh9hiej20fa0m8q4u.jpg
+[2017-08-08 09:51:36.405] [INFO] spider - 开始下载 http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibilh9hiej20fa0m8q4u.jpg
+[2017-08-08 09:51:36.406] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilheqpej20h00piwij.jpg
+[2017-08-08 09:51:36.406] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilheqpej20h00piwij.jpg
+[2017-08-08 09:51:36.407] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhe4ckj20k80zzn1g.jpg
+[2017-08-08 09:51:36.407] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhe4ckj20k80zzn1g.jpg
+[2017-08-08 09:51:36.408] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibili1vw1j20k80qzjvb.jpg
+[2017-08-08 09:51:36.409] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibili1vw1j20k80qzjvb.jpg
+[2017-08-08 09:51:36.410] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhytwgj20k80qygp2.jpg
+[2017-08-08 09:51:36.410] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhytwgj20k80qygp2.jpg
+[2017-08-08 09:51:36.411] [INFO] spider - 加入下载文件： http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibili3n02j20k80qz788.jpg
+[2017-08-08 09:51:36.411] [INFO] spider - 开始下载 http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibili3n02j20k80qz788.jpg
+[2017-08-08 09:51:36.414] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhyt00j20k80qyjwm.jpg
+[2017-08-08 09:51:36.414] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhyt00j20k80qyjwm.jpg
+[2017-08-08 09:51:36.415] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/85264_14b44_115.jpg
+[2017-08-08 09:51:36.416] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/85264_14b44_115.jpg
+[2017-08-08 09:51:36.416] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/86048_23b11_115.jpg
+[2017-08-08 09:51:36.433] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/86048_23b11_115.jpg
+[2017-08-08 09:51:36.434] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/03/87541_12b28_115.jpg
+[2017-08-08 09:51:36.434] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/03/87541_12b28_115.jpg
+[2017-08-08 09:51:36.435] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/85480_17b30_115.jpg
+[2017-08-08 09:51:36.435] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/85480_17b30_115.jpg
+[2017-08-08 09:51:36.435] [INFO] spider - 加入下载文件： http://i.meizitu.net/pfiles/img/footer.gif
+[2017-08-08 09:51:36.435] [INFO] spider - 开始下载 http://i.meizitu.net/pfiles/img/footer.gif
+[2017-08-08 09:51:39.964] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:51:40.600] [INFO] spider - store 9d52c073gy1fibilhbcylj20k80qwael.jpg success
+[2017-08-08 09:51:40.687] [INFO] spider - store 87541_12b28_115.jpg success
+[2017-08-08 09:51:40.687] [INFO] spider - store 86048_23b11_115.jpg success
+[2017-08-08 09:51:40.687] [INFO] spider - store 85264_14b44_115.jpg success
+[2017-08-08 09:51:40.691] [INFO] spider - store footer.gif success
+[2017-08-08 09:51:40.695] [INFO] spider - store 85480_17b30_115.jpg success
+[2017-08-08 09:51:40.753] [INFO] spider - store 9d52c073gy1fibili1vw1j20k80qzjvb.jpg success
+[2017-08-08 09:51:40.761] [INFO] spider - store 9d52c073gy1fibilhytwgj20k80qygp2.jpg success
+[2017-08-08 09:51:40.771] [INFO] spider - store 9d52c073gy1fibilheqpej20h00piwij.jpg success
+[2017-08-08 09:51:40.782] [INFO] spider - store 9d52c073gy1fibilh9hiej20fa0m8q4u.jpg success
+[2017-08-08 09:51:40.785] [INFO] spider - store 9d52c073gy1fibilhe4ckj20k80zzn1g.jpg success
+[2017-08-08 09:51:40.800] [INFO] spider - store 9d52c073gy1fibilha8g5j20ia0wiady.jpg success
+[2017-08-08 09:51:40.803] [INFO] spider - store 9d52c073gy1fibilhyt00j20k80qyjwm.jpg success
+[2017-08-08 09:51:40.808] [INFO] spider - store 9d52c073gy1fibili3n02j20k80qz788.jpg success
+[2017-08-08 09:51:44.967] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:51:49.968] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:51:54.974] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:51:59.977] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:52:04.979] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:52:09.979] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:52:14.983] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:52:19.986] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:52:24.987] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:52:29.991] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:00.392] [INFO] spider - start to crawl.....
+[2017-08-08 09:58:01.346] [INFO] spider - download http://www.mzitu.com/zipai/ is successful!
+[2017-08-08 09:58:01.347] [INFO] spider - 开始解析！
+[2017-08-08 09:58:01.419] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilha8g5j20ia0wiady.jpg
+[2017-08-08 09:58:01.420] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilha8g5j20ia0wiady.jpg
+[2017-08-08 09:58:01.422] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhbcylj20k80qwael.jpg
+[2017-08-08 09:58:01.422] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhbcylj20k80qwael.jpg
+[2017-08-08 09:58:01.423] [INFO] spider - 加入下载文件： http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibilh9hiej20fa0m8q4u.jpg
+[2017-08-08 09:58:01.424] [INFO] spider - 开始下载 http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibilh9hiej20fa0m8q4u.jpg
+[2017-08-08 09:58:01.424] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilheqpej20h00piwij.jpg
+[2017-08-08 09:58:01.425] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilheqpej20h00piwij.jpg
+[2017-08-08 09:58:01.425] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhe4ckj20k80zzn1g.jpg
+[2017-08-08 09:58:01.425] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhe4ckj20k80zzn1g.jpg
+[2017-08-08 09:58:01.426] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibili1vw1j20k80qzjvb.jpg
+[2017-08-08 09:58:01.427] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibili1vw1j20k80qzjvb.jpg
+[2017-08-08 09:58:01.428] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhytwgj20k80qygp2.jpg
+[2017-08-08 09:58:01.428] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhytwgj20k80qygp2.jpg
+[2017-08-08 09:58:01.429] [INFO] spider - 加入下载文件： http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibili3n02j20k80qz788.jpg
+[2017-08-08 09:58:01.429] [INFO] spider - 开始下载 http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibili3n02j20k80qz788.jpg
+[2017-08-08 09:58:01.433] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhyt00j20k80qyjwm.jpg
+[2017-08-08 09:58:01.433] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhyt00j20k80qyjwm.jpg
+[2017-08-08 09:58:01.435] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/85264_14b44_115.jpg
+[2017-08-08 09:58:01.435] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/85264_14b44_115.jpg
+[2017-08-08 09:58:01.436] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/86048_23b11_115.jpg
+[2017-08-08 09:58:01.436] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/86048_23b11_115.jpg
+[2017-08-08 09:58:01.436] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/03/87541_12b28_115.jpg
+[2017-08-08 09:58:01.436] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/03/87541_12b28_115.jpg
+[2017-08-08 09:58:01.437] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/85480_17b30_115.jpg
+[2017-08-08 09:58:01.437] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/85480_17b30_115.jpg
+[2017-08-08 09:58:01.483] [INFO] spider - 加入下载文件： http://i.meizitu.net/pfiles/img/footer.gif
+[2017-08-08 09:58:01.484] [INFO] spider - 开始下载 http://i.meizitu.net/pfiles/img/footer.gif
+[2017-08-08 09:58:03.279] [INFO] spider - store 9d52c073gy1fibilh9hiej20fa0m8q4u.jpg success
+[2017-08-08 09:58:03.280] [INFO] spider - store 9d52c073gy1fibili1vw1j20k80qzjvb.jpg success
+[2017-08-08 09:58:03.280] [INFO] spider - store 9d52c073gy1fibilheqpej20h00piwij.jpg success
+[2017-08-08 09:58:03.280] [INFO] spider - store 9d52c073gy1fibilha8g5j20ia0wiady.jpg success
+[2017-08-08 09:58:03.281] [INFO] spider - store 9d52c073gy1fibili3n02j20k80qz788.jpg success
+[2017-08-08 09:58:03.281] [INFO] spider - store 9d52c073gy1fibilhytwgj20k80qygp2.jpg success
+[2017-08-08 09:58:03.281] [INFO] spider - store 9d52c073gy1fibilhbcylj20k80qwael.jpg success
+[2017-08-08 09:58:03.281] [INFO] spider - store 9d52c073gy1fibilhe4ckj20k80zzn1g.jpg success
+[2017-08-08 09:58:03.281] [INFO] spider - store 9d52c073gy1fibilhyt00j20k80qyjwm.jpg success
+[2017-08-08 09:58:03.341] [INFO] spider - store 87541_12b28_115.jpg success
+[2017-08-08 09:58:03.341] [INFO] spider - store footer.gif success
+[2017-08-08 09:58:03.343] [INFO] spider - store 85480_17b30_115.jpg success
+[2017-08-08 09:58:03.345] [INFO] spider - store 85264_14b44_115.jpg success
+[2017-08-08 09:58:03.345] [INFO] spider - store 86048_23b11_115.jpg success
+[2017-08-08 09:58:05.475] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:10.478] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:24.169] [INFO] spider - start to crawl.....
+[2017-08-08 09:58:24.368] [INFO] spider - download http://www.mzitu.com/zipai/ is successful!
+[2017-08-08 09:58:24.369] [INFO] spider - 开始解析！
+[2017-08-08 09:58:24.436] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilha8g5j20ia0wiady.jpg
+[2017-08-08 09:58:24.436] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilha8g5j20ia0wiady.jpg
+[2017-08-08 09:58:24.438] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhbcylj20k80qwael.jpg
+[2017-08-08 09:58:24.439] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhbcylj20k80qwael.jpg
+[2017-08-08 09:58:24.440] [INFO] spider - 加入下载文件： http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibilh9hiej20fa0m8q4u.jpg
+[2017-08-08 09:58:24.440] [INFO] spider - 开始下载 http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibilh9hiej20fa0m8q4u.jpg
+[2017-08-08 09:58:24.441] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilheqpej20h00piwij.jpg
+[2017-08-08 09:58:24.442] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilheqpej20h00piwij.jpg
+[2017-08-08 09:58:24.443] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhe4ckj20k80zzn1g.jpg
+[2017-08-08 09:58:24.443] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhe4ckj20k80zzn1g.jpg
+[2017-08-08 09:58:24.444] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibili1vw1j20k80qzjvb.jpg
+[2017-08-08 09:58:24.445] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibili1vw1j20k80qzjvb.jpg
+[2017-08-08 09:58:24.445] [INFO] spider - 加入下载文件： http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhytwgj20k80qygp2.jpg
+[2017-08-08 09:58:24.445] [INFO] spider - 开始下载 http://wx3.sinaimg.cn/mw1024/9d52c073gy1fibilhytwgj20k80qygp2.jpg
+[2017-08-08 09:58:24.446] [INFO] spider - 加入下载文件： http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibili3n02j20k80qz788.jpg
+[2017-08-08 09:58:24.446] [INFO] spider - 开始下载 http://wx2.sinaimg.cn/mw1024/9d52c073gy1fibili3n02j20k80qz788.jpg
+[2017-08-08 09:58:24.449] [INFO] spider - 加入下载文件： http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhyt00j20k80qyjwm.jpg
+[2017-08-08 09:58:24.449] [INFO] spider - 开始下载 http://wx4.sinaimg.cn/mw1024/9d52c073gy1fibilhyt00j20k80qyjwm.jpg
+[2017-08-08 09:58:24.451] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/85264_14b44_115.jpg
+[2017-08-08 09:58:24.451] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/85264_14b44_115.jpg
+[2017-08-08 09:58:24.451] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/86048_23b11_115.jpg
+[2017-08-08 09:58:24.452] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/86048_23b11_115.jpg
+[2017-08-08 09:58:24.452] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/03/87541_12b28_115.jpg
+[2017-08-08 09:58:24.452] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/03/87541_12b28_115.jpg
+[2017-08-08 09:58:24.453] [INFO] spider - 加入下载文件： http://i.meizitu.net/thumbs/2017/02/85480_17b30_115.jpg
+[2017-08-08 09:58:24.453] [INFO] spider - 开始下载 http://i.meizitu.net/thumbs/2017/02/85480_17b30_115.jpg
+[2017-08-08 09:58:24.453] [INFO] spider - 加入下载文件： http://i.meizitu.net/pfiles/img/footer.gif
+[2017-08-08 09:58:24.453] [INFO] spider - 开始下载 http://i.meizitu.net/pfiles/img/footer.gif
+[2017-08-08 09:58:28.660] [INFO] spider - store 9d52c073gy1fibilhbcylj20k80qwael.jpg success
+[2017-08-08 09:58:28.667] [INFO] spider - store 9d52c073gy1fibilh9hiej20fa0m8q4u.jpg success
+[2017-08-08 09:58:28.746] [INFO] spider - store 86048_23b11_115.jpg success
+[2017-08-08 09:58:28.759] [INFO] spider - store 9d52c073gy1fibili1vw1j20k80qzjvb.jpg success
+[2017-08-08 09:58:28.767] [INFO] spider - store 87541_12b28_115.jpg success
+[2017-08-08 09:58:28.768] [INFO] spider - store 85264_14b44_115.jpg success
+[2017-08-08 09:58:28.768] [INFO] spider - store 85480_17b30_115.jpg success
+[2017-08-08 09:58:28.769] [INFO] spider - store footer.gif success
+[2017-08-08 09:58:28.780] [INFO] spider - store 9d52c073gy1fibilhytwgj20k80qygp2.jpg success
+[2017-08-08 09:58:28.795] [INFO] spider - store 9d52c073gy1fibili3n02j20k80qz788.jpg success
+[2017-08-08 09:58:28.804] [INFO] spider - store 9d52c073gy1fibilheqpej20h00piwij.jpg success
+[2017-08-08 09:58:28.809] [INFO] spider - store 9d52c073gy1fibilhe4ckj20k80zzn1g.jpg success
+[2017-08-08 09:58:28.819] [INFO] spider - store 9d52c073gy1fibilhyt00j20k80qyjwm.jpg success
+[2017-08-08 09:58:29.254] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:34.259] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:37.659] [INFO] spider - store 9d52c073gy1fibilha8g5j20ia0wiady.jpg success
+[2017-08-08 09:58:39.264] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:44.269] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:49.273] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:54.277] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:58:59.281] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:04.285] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:09.288] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:14.293] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:19.297] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:24.301] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:29.305] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:34.310] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:39.312] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:44.313] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:49.313] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:54.316] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 09:59:59.317] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:04.321] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:09.325] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:14.330] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:19.329] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:24.331] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:29.332] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:34.336] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:39.339] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:44.342] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:49.348] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:54.351] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:00:59.354] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
+[2017-08-08 10:01:04.358] [INFO] spider - PARENT process got message from cp: { version: '', data: 'jft' }
