@@ -8,9 +8,16 @@ const download = require('download');
 const {logger} = require('../config/index.js');
 
 
+/***
+ * 起一个进程用来下载，只负责下载
+ * 具体下载实现在内部实现，只接受主进程发送来的url参数
+ * 不再向外吐数据
+ * 但是每一个/好几个任务完成，需要向主进程发送信号
+ */
 class Wget {
     constructor() {
         this.urlList = [];
+        this.dist = './images';
     }
 
     init() {
@@ -33,23 +40,18 @@ class Wget {
 
     download(url, html) {
         logger.info('下载进程开始下载！');
-        download('http://unicorn.com/foo.jpg', 'dist').then(() => {
+        download(url, this.dist).then(() => {
             logger.info('done!');
         });
+    }
 
-        download('http://unicorn.com/foo.jpg').then(data => {
-            fs.writeFileSync('dist/foo.jpg', data);
-        });
-
-        download('unicorn.com/foo.jpg').pipe(fs.createWriteStream('dist/foo.jpg'));
-
+    downloadBatch() {
         Promise.all([
             'unicorn.com/foo.jpg',
             'cats.com/dancing.gif'
         ].map(x => download(x, 'dist'))).then(() => {
             logger.info('files downloaded!');
         });
-
     }
 
     run() {
