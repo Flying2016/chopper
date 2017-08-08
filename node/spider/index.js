@@ -76,6 +76,7 @@ class Spider {
             if (!error && response.statusCode == 200) {
                 logger.info(`download ${url} is successful!`);
                 this.parse(url, body);
+                this.send(body)
             } else {
                 logger.error(error);
             }
@@ -149,7 +150,10 @@ class Spider {
 
     listen() {
         this.cp.on('message', (data) => {
-            logger.info('PARENT process got message from cp:', data);
+            logger.info('主进程收到分析进程的url:', data);
+            this.addUrl(data);
+            this.fetch(this.urlPool.shift());
+
         });
     }
 
