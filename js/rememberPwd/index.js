@@ -56,8 +56,5 @@ Login.prototype.init = function () {
     }
 };
 
-let login = new Login('myForm');
-login.init();
-$("#loginBtn").click(() => {
-    login.submit()
-})
+
+
