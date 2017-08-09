@@ -43,6 +43,7 @@ class Spider {
     }
 
     fetch(url, cb) {
+        logger.info(`start to fetch ${url}...`);
         request({url: url}, function (err, res, body) {
             if (err) {
                 console.log(err)
@@ -59,10 +60,10 @@ class Spider {
      */
     parseIndex(html) {
         logger.info('start parse the index page....');
-        logger.info(html);
+        // logger.info(html);
         let $    = cheerio.load(html);
         let href = $('#navcontainer li:nth-child(3) a').attr('href');
-        logger.info(`index page page href is ${href}`);
+        logger.info(`index page href is ${href}`);
         return href;
     }
 
@@ -74,7 +75,7 @@ class Spider {
             this.pageUrlList.push(href)
         }
         for (let i = 0; i < this.pageUrlList.length; i++) {
-            logger.info(`page url list is ${this.pageUrlList[i]}\n`);
+            logger.info(`page url nth:${i} is ${this.pageUrlList[i]}`);
         }
         return this.pageUrlList;
     }
@@ -85,7 +86,7 @@ class Spider {
      */
     parsePage(html) {
         logger.info('start parse the page....');
-        logger.info(html);
+        // logger.info(html);
         let $         = cheerio.load(html);
         let videoUrl  = $('#videobox .listchannel>div>a');
         let videoName = $('#videobox .listchannel>div>a>img');
