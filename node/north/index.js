@@ -28,20 +28,37 @@ const logger = log4js.getLogger('spider');
 
 class Spider {
     constructor(seedUrl) {
+        // 首页地址
         this.seedUrl = seedUrl;
+        this.filename = './url.csv';
+        // 限制页面条数
         this.pageNumberLimit = 10;
+        // 分页页面地址池
         this.pageUrlList = [];
+        // 视频页页面地址池
+        this.videoPageUrlList = [];
     }
 
     // touch file [./url.csv] if not exist /data
     init() {
-        fs.appendFile('./url.csv', 'name,size,url\n', 'utf8', (err) => {
-            if (err) throw err;
-            logger.info('url.csv does not exist,create url.csv success!');
+        fs.exists(this.filename, (exists) => {
+            if (exists) {
+                return;
+            }
+            fs.appendFile('./url.csv', 'name,size,url\n', 'utf8', (err) => {
+                if (err) throw err;
+                logger.info('url.csv does not exist,create url.csv success!');
+            });
+
         });
         return this;
     }
 
+    /***
+     * 公共的get方法，有一个回掉参数，需要注意，应该做一下回掉函数的有效性判断
+     * @param url {string}
+     * @param cb {function}
+     */
     fetch(url, cb) {
         logger.info(`start to fetch ${url}...`);
         request({url: url}, function (err, res, body) {
@@ -54,8 +71,9 @@ class Spider {
     }
 
     /***
-     * 解析应用分析地址
-     * @param html
+     * 解析应用的首页地址，目的是为了得到起始地址
+     * 但是其实没有什么用
+     * @param html {string}
      * @returns {*|jQuery}
      */
     parseIndex(html) {
@@ -67,6 +85,11 @@ class Spider {
         return href;
     }
 
+    /***
+     * 根据起始地址
+     * @param startUrl
+     * @returns {Array}
+     */
     makePageUrlList(startUrl) {
         let href, j;
         logger.info('start make the page url list....');
@@ -85,40 +108,34 @@ class Spider {
      * @param html
      */
     parsePage(html) {
-        logger.info('start parse the page....');
         // logger.info(html);
         let $ = cheerio.load(html);
-        let videoUrl = $('#videobox .listchannel>div>a');
-        let videoName = $('#videobox .listchannel>div>a>img');
-        console.dir(videoUrl)
-        console.dir(videoName)
-        // this.fetch(videoUrl, this.parseVideo.bind(this))
+        let href;
+        logger.info('start parse the page....');
+        $('#videobox .listchannel>div>a').each((index, element) => {
+            href = $(element).attr('href');
+            this.videoPageUrlList.push(href)
+        });
+        this.fetch(this.videoPageUrlList.pop(), this.parseVideo.bind(this))
     }
 
 
     parseVideo(html) {
-        let $ = cheerio.load(html)
-        let src = $('#vid source').attr('src')
-        console.log(src);
-        let name = $('#videodetails-content a span').text()
-        let filename = './data/' + name + '.txt'
+        let $, name, src;
+        $ = cheerio.load(html)
+        src = $('#vid source').attr('src');
+        name = $('#viewvideo-title').text();
+        logger.info(`collected: ${name} -- ${src}`);
+        this.store(name, src)
     }
 
     /***
-     *
+     * 存储随意格式
      */
-    storeCsv() {
-
-        let filename;
-        let mp4url;
-        let src;
-
-        fs.appendFile(x, y, function (err) {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log('The "data to append" was appended to file!');
-            }
+    store(name, src) {
+        fs.appendFile(this.filename, `${name},${src}\n`, 'utf8', (err) => {
+            if (err) throw err;
+            logger.info('url.csv does not exist,create url.csv success!');
         });
     }
 
