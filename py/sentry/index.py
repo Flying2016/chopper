@@ -10,7 +10,7 @@ from bin import Spy
 app = Spy()
 
 
-@app.task(name='zhihu', url='')
+@app.task(name='zhihu', url='www.baidu.com')
 def zhihu():
 	print 'sss'
 

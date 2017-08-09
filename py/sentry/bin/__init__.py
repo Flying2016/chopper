@@ -9,7 +9,9 @@ class Spy(object):
 		self.tasks = {}
 	
 	def run(self):
-		pass
+		for item in self.tasks.values():
+			item['task_fn'](item['url'])
+		self.run()
 	
 	def plug(self):
 		pass
@@ -24,9 +26,10 @@ class Spy(object):
 		def decorator(func):
 			@functools.wraps(func)
 			def wrapper():
-				task_fn = func()
-				self.register(name=name, url=url, task_fn=task_fn)
+				task_fn = func
 				return task_fn
+			
+			self.register(name=name, url=url, task_fn=wrapper)
 			
 			return wrapper
 		
