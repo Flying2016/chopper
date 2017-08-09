@@ -1,9 +1,29 @@
 /**
  * Created by owen-carter on 17/8/9.
  */
-let fs      = require('fs');
-let request = require('request');
-let cheerio = require('cheerio');
+const fs      = require('fs');
+const request = require('request');
+const cheerio = require('cheerio');
+const log4js  = require('log4js');
+
+
+log4js.configure({
+    categories: {
+        default: {
+            appenders: ['spider', 'out'],
+            level    : 'info'
+        }
+    },
+    appenders : {
+        out   : {type: 'stdout'},
+        spider: {
+            type    : 'file',
+            filename: './spider.log'
+        }
+    }
+});
+
+const logger = log4js.getLogger('spider');
 
 
 class Spider {
@@ -15,7 +35,11 @@ class Spider {
 
     // touch file [./url.csv] if not exist /data
     init() {
-
+        fs.appendFile('./url.csv', 'name,size,url\n', 'utf8', (err) => {
+            if (err) throw err;
+            logger.info('url.csv does not exist,create url.csv success!');
+        });
+        return this;
     }
 
     fetch(url, cb) {
@@ -34,17 +58,25 @@ class Spider {
      * @returns {*|jQuery}
      */
     parseIndex(html) {
-        let $    = cheerio.load(html)
+        logger.info('start parse the index page....');
+        logger.info(html);
+        let $    = cheerio.load(html);
         let href = $('#navcontainer li:nth-child(3) a').attr('href');
-        return href
+        logger.info(`index page page href is ${href}`);
+        return href;
     }
 
-    makePageUrlList(href) {
-        let Href, j;
+    makePageUrlList(startUrl) {
+        let href, j;
+        logger.info('start make the page url list....');
         for (j = 1; j < this.pageNumberLimit; j++) {
-            Href = href + '&page=' + j;
-            this.pageUrlList.push(Href)
+            href = startUrl + '&page=' + j;
+            this.pageUrlList.push(href)
         }
+        for (let i = 0; i < this.pageUrlList.length; i++) {
+            logger.info(`page url list is ${this.pageUrlList[i]}\n`);
+        }
+        return this.pageUrlList;
     }
 
     /***
@@ -52,6 +84,8 @@ class Spider {
      * @param html
      */
     parsePage(html) {
+        logger.info('start parse the page....');
+        logger.info(html);
         let $         = cheerio.load(html);
         let videoUrl  = $('#videobox .listchannel>div>a');
         let videoName = $('#videobox .listchannel>div>a>img');
