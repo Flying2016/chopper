@@ -1,0 +1,17 @@
+{
+  "name": "chopper",
+  "version": "1.0.0",
+  "description": "a node spider help",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "node",
+    "gulp",
+    "react",
+    "help"
+  ],
+  "author": "owen-carter",
+  "license": "MIT"
+}
