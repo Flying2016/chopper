@@ -8,7 +8,9 @@ let cheerio = require('cheerio');
 
 class Spider {
     constructor(seedUrl) {
-        this.seedUrl = seedUrl;
+        this.seedUrl         = seedUrl;
+        this.pageNumberLimit = 10;
+        this.pageUrlList     = [];
     }
 
     // touch file [./url.csv] if not exist /data
@@ -16,27 +18,52 @@ class Spider {
 
     }
 
-    fetch(url) {
+    fetch(url, cb) {
         request({url: url}, function (err, res, body) {
             if (err) {
                 console.log(err)
             } else {
-                // parse(body)
+                cb(body)
             }
         });
     }
 
-    parseIndex() {
-
+    /***
+     * 解析应用分析地址
+     * @param html
+     * @returns {*|jQuery}
+     */
+    parseIndex(html) {
+        let $    = cheerio.load(html)
+        let href = $('#navcontainer li:nth-child(3) a').attr('href');
+        return href
     }
 
-    parsePage() {
+    makePageUrlList(href) {
+        let Href, j;
+        for (j = 1; j < this.pageNumberLimit; j++) {
+            Href = href + '&page=' + j;
+            this.pageUrlList.push(Href)
+        }
+    }
 
+    /***
+     * 解析当前页面中所有的视频地址，但是好像不是真实地址
+     * @param html
+     */
+    parsePage(html) {
+        let $         = cheerio.load(html);
+        let videoUrl  = $('#videobox .listchannel>div>a');
+        let videoName = $('#videobox .listchannel>div>a>img');
     }
 
 
-    parseVedio() {
-
+    parseVideo(html) {
+        let $   = cheerio.load(html)
+        let src = $('#vid source').attr('src')
+        console.log(src);
+        let name     = $('#videodetails-content a span').text()
+        let filename = './data/' + name + '.txt'
     }
 
 
@@ -56,7 +83,11 @@ class Spider {
     }
 
     run() {
-
+        this.fetch(this.seedUrl, (html) => {
+            let startUrl = this.parseIndex(html);
+            this.makePageUrlList(startUrl);
+            this.fetch(this.pageUrlList.shift(), this.parsePage)
+        })
     }
 
 
