@@ -13,5 +13,12 @@
     "help"
   ],
   "author": "owen-carter",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "download": "^6.2.5",
+    "log4js": "^2.3.3",
+    "request": "^2.81.0",
+    "superagent": "^3.5.2"
+  }
 }
