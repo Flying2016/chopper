@@ -1,4 +1,10 @@
-# coding: utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 from bin import Spy
 
 app = Spy()
@@ -6,7 +12,9 @@ app = Spy()
 
 @app.task(name='zhihu', url='')
 def zhihu():
-    pass
+	print 'sss'
 
 
 app.run()
+print app
+print app.show()
