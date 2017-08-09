@@ -1,23 +1,23 @@
 /**
  * Created by owen-carter on 17/8/9.
  */
-const fs      = require('fs');
+const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
-const log4js  = require('log4js');
+const log4js = require('log4js');
 
 
 log4js.configure({
     categories: {
         default: {
             appenders: ['spider', 'out'],
-            level    : 'info'
+            level: 'info'
         }
     },
-    appenders : {
-        out   : {type: 'stdout'},
+    appenders: {
+        out: {type: 'stdout'},
         spider: {
-            type    : 'file',
+            type: 'file',
             filename: './spider.log'
         }
     }
@@ -28,9 +28,9 @@ const logger = log4js.getLogger('spider');
 
 class Spider {
     constructor(seedUrl) {
-        this.seedUrl         = seedUrl;
+        this.seedUrl = seedUrl;
         this.pageNumberLimit = 10;
-        this.pageUrlList     = [];
+        this.pageUrlList = [];
     }
 
     // touch file [./url.csv] if not exist /data
@@ -61,7 +61,7 @@ class Spider {
     parseIndex(html) {
         logger.info('start parse the index page....');
         // logger.info(html);
-        let $    = cheerio.load(html);
+        let $ = cheerio.load(html);
         let href = $('#navcontainer li:nth-child(3) a').attr('href');
         logger.info(`index page href is ${href}`);
         return href;
@@ -87,21 +87,26 @@ class Spider {
     parsePage(html) {
         logger.info('start parse the page....');
         // logger.info(html);
-        let $         = cheerio.load(html);
-        let videoUrl  = $('#videobox .listchannel>div>a');
+        let $ = cheerio.load(html);
+        let videoUrl = $('#videobox .listchannel>div>a');
         let videoName = $('#videobox .listchannel>div>a>img');
+        console.dir(videoUrl)
+        console.dir(videoName)
+        // this.fetch(videoUrl, this.parseVideo.bind(this))
     }
 
 
     parseVideo(html) {
-        let $   = cheerio.load(html)
+        let $ = cheerio.load(html)
         let src = $('#vid source').attr('src')
         console.log(src);
-        let name     = $('#videodetails-content a span').text()
+        let name = $('#videodetails-content a span').text()
         let filename = './data/' + name + '.txt'
     }
 
-
+    /***
+     *
+     */
     storeCsv() {
 
         let filename;
@@ -121,7 +126,7 @@ class Spider {
         this.fetch(this.seedUrl, (html) => {
             let startUrl = this.parseIndex(html);
             this.makePageUrlList(startUrl);
-            this.fetch(this.pageUrlList.shift(), this.parsePage)
+            this.fetch(this.pageUrlList.shift(), this.parsePage.bind(this))
         })
     }
 
