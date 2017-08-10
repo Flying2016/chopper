@@ -143,7 +143,7 @@ class Spider {
      * 存储随意格式
      */
     store(name, src) {
-        fs.appendFile(this.filename, `${name},$${src}\n`, 'utf8', (err) => {
+        fs.appendFile(this.filename, `${name},${src} \n`, 'utf8', (err) => {
             if (err) throw err;
             logger.info(`${name},$${src} appendTo ${this.filename} success!`);
         });
