@@ -84,12 +84,12 @@ class Spider {
         let proxyUrlList = [];
         let $ = cheerio.load(html);
         let trList = $("#ip_list tr");
-        let proxy = {};
         let tr;
         let tdList;
         let speed;
         let connectTime;
         for (let i = 1; i < trList.length; i++) {
+            let proxy = {};
             tr = trList.eq(i);
             tdList = tr.children("td");
             proxy['ip'] = tdList.eq(1).text();
@@ -104,37 +104,26 @@ class Spider {
                 proxyUrlList.push(proxy);
             }
         }
-        // trList.each((index, element) => {
-        //     tdList = $(element).children('td');
-        //     proxy['ip'] = $(tdList).eq(1).text();
-        //     proxy['port'] =  $(tdList).eq(2).text();
-        //     console.dir(element)
-        //     speed =  $(tdList).eq(6).children("div").attr("title");
-        //     speed = speed.substring(0, speed.length - 1);
-        //     connectTime =  $(tdList).eq(7).children("div").attr("title");
-        //     connectTime = connectTime.substring(0, connectTime.length - 1);
-        //     if (speed <= 5 && connectTime <= 1) {
-        //         logger.info(`find a nice proxy ${proxy['url']}:${proxy['port']}`);
-        //         proxyUrlList.push(proxy);
-        //     }
-        // });
         // 过滤地址
+        logger.info('start filter proxy url...');
         this.filterProxy(proxyUrlList);
-        if (this.proxyPageNumber < this.proxyPageNumberLimit) {
-            this.searchProxy(this.proxyPageNumber++, this.parseProxy.bind(this));
-        }
+
     }
 
     filterProxy(proxyUrlList) {
         let url = "http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js";
+        let flag = proxyUrlList.length;  //检查是否所有异步函数都执行完的标志量
         for (let i = 0; i < proxyUrlList.length; i++) {
             let proxy = proxyUrlList[i];
+            logger.info(`start filter proxy url ${proxy['ip']}:${proxy['port']}...`);
             request({
                 url: url,
                 proxy: "http://" + proxy['ip'] + ":" + proxy['port'],
                 method: 'GET',
-                timeout: 20000  //20s没有返回则视为代理不行
+                timeout: 20 * 1000 * 4 / 20
             }, (error, response, body) => {
+                // 完成一个，做一个标记
+                flag--;
                 let href;
                 if (error) {
                     return;
@@ -142,13 +131,34 @@ class Spider {
                 if (response.statusCode == 200) {
                     href = response.request['proxy']['href'];
                     this.validProxyUrlPool.push(href);
+                    this.storeProxy(href);
                     logger.info(`find a useful proxy : ${href}`);
                 } else {
                     logger.info(`find a bad proxy ${response.request['proxy']['href']}`);
                 }
+
+                // 如果本批次完成
+                if (flag === 0) {
+                    // 当前页面小于总页数
+                    if (this.proxyPageNumber < this.proxyPageNumberLimit) {
+                        this.searchProxy(this.proxyPageNumber++, this.parseProxy.bind(this));
+                    }
+                }
+                //
             });
         }
+
     }
+
+    /***
+     * 存储随意格式
+     */
+    storeProxy(line) {
+        let filename = './ip.txt';
+        logger.info(`store ${line} to ip.txt`);
+        this.save(filename, line)
+    }
+
 
     /***
      * 公共的get方法，有一个回掉参数，需要注意，应该做一下回掉函数的有效性判断
@@ -230,20 +240,34 @@ class Spider {
         name = $('#viewvideo-title').text();
         src = $('#vid source').attr('src');
         logger.info(`collected: ${name.replace(/\n/g, '')} -- ${src}`);
-        this.store(name, src);
+        this.storeVideoUrl(name, src);
         this.fetch(this.videoPageUrlList.pop(), this.parseVideo.bind(this))
     }
 
     /***
      * 存储随意格式
      */
-    store(name, src) {
+    storeVideoUrl(name, src) {
+        let line;
         name = Spider.chMop(name);
         src = Spider.chMop(src);
-        fs.appendFile(this.filename, `${name.replace(/\n/g, '')},${src}\n`, 'utf8', (err) => {
-            if (err) throw err;
-            logger.info(`${name.replace(/\n/g)},${src} appendTo ${this.filename} success!`);
+        line = `${name.replace(/\n/g, '')},${src}\n`;
+        this.save(this.filename, line)
+    }
+
+    save(filename, line) {
+        fs.exists(filename, (exists) => {
+            if (exists) {
+                fs.appendFile(filename, `${line}\n`, 'utf8', (err) => {
+                    if (err) throw err;
+                    logger.info(`${line} appendTo ${filename} success!`);
+                });
+            } else {
+                logger.error(`${filename} does not exist,so create it,and succeed!`);
+            }
+
         });
+
     }
 
     /***
