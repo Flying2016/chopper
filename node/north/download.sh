@@ -4,5 +4,7 @@ filename=./url.csv
 while read line
 do
     echo ${line}
-    wget ${line}
+    curl ${line}
+    sleep 60
 done < ${filename}
+
