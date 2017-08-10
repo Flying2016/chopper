@@ -32,7 +32,7 @@ class Spider {
         this.seedUrl          = seedUrl;
         this.filename         = './url.csv';
         // 限制页面条数
-        this.pageNumberLimit  = 6;
+        this.pageNumberLimit  = 30000;
         // 分页页面地址池
         this.pageUrlList      = [];
         // 视频页页面地址池
@@ -122,7 +122,7 @@ class Spider {
         });
         feedUrl = this.pageUrlList.pop();
         if (this.pageUrlList.length) {
-            this.fetch(this.pageUrlList.pop(), this.parsePage.bind(this))
+            this.fetch(feedUrl, this.parsePage.bind(this))
         } else {
             this.fetch(this.videoPageUrlList.pop(), this.parseVideo.bind(this))
         }
@@ -132,9 +132,9 @@ class Spider {
     parseVideo(html) {
         let $, name, src;
         $    = cheerio.load(html)
-        src  = $('#vid source').attr('src');
         name = $('#viewvideo-title').text();
-        logger.info(`collected: ${name} -- ${src}`);
+        src  = $('#vid source').attr('src');
+        logger.info(`collected: ${name.replace(/\n/g, '')} -- ${src}`);
         this.store(name, src);
         this.fetch(this.videoPageUrlList.pop(), this.parseVideo.bind(this))
     }
@@ -143,10 +143,24 @@ class Spider {
      * 存储随意格式
      */
     store(name, src) {
-        fs.appendFile(this.filename, `${name},${src} \n`, 'utf8', (err) => {
+        name = Spider.chMop(name);
+        src  = Spider.chMop(src);
+        fs.appendFile(this.filename, `${name.replace(/\n/g, '')},${src}\n`, 'utf8', (err) => {
             if (err) throw err;
-            logger.info(`${name},$${src} appendTo ${this.filename} success!`);
+            logger.info(`${name.replace(/\n/g)},${src} appendTo ${this.filename} success!`);
         });
+    }
+
+    /***
+     * 去除前后空格，方便存储
+     * @param str
+     * @returns {*}
+     */
+    static chMop(str) {
+        if (str) {
+            return str.replace(/(^\s*)|(\s*$)/g, "")
+        }
+        return '';
     }
 
     /***
