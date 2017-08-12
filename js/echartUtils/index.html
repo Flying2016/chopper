@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
+    <title>品字型的展示</title>
+    <style>
+
+        #pin1 {
+            width: 100%;
+            color: red;
+            background: red;
+        }
+
+        #pin2 {
+            width: 50%;
+            color: #ff23d3;
+            background: #ff23d3;
+            float: left;
+        }
+
+        #pin3 {
+            width: 50%;
+            color: black;
+            background: black;
+            float: right;
+        }
+    </style>
 </head>
 <body>
-<form action="/jft" method="post">
-	<input type="text">
-	<input type="text">
-	<input type="text">
-</form>
-
+<div id="pin1">555555555</div>
+<div id="pin2">666666666</div>
+<div id="pin3">777777777</div>
 </body>
-<script src="index.js"></script>
-<script src="spec.js.js"></script>
-<script>
-    let login = new Login('myForm');
-    login.init();
-    $("#loginBtn").click(() = > {
-        login.submit()
-    })
-</script>
 </html>

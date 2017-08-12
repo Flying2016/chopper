@@ -1,7 +1,7 @@
 /**
  * Created by owen-carter on 17/8/11.
  */
-import Spider from './bin';
+const Spider = require('./bin');
 
-const app = new Spider('http://email.91dizhi.at.gmail.com.7h4.space/index.php');
+const app = new Spider('http://www.xicidaili.com/nn/');
 app.init().run();
