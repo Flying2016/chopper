@@ -5,61 +5,77 @@
 const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
+const iconv = require('iconv-lite');
 const logger = require('../utils/log');
-
 
 class Spider {
     /***
      * define all configure
      */
     constructor() {
-        this.pageUrlStart = '';
-        this.pageNumberLimit = '';
+        this.filename = './magnet.csv';
+        this.pageNumberLimit = 1;
         this.urlPool = [];
+        this.videoPageUrlList = [];
+        this.makeUrlFn = null;
     }
 
     /***
      * 加载配置
      * @returns {Spider}
      */
-    loadConfig() {
+    loadConfig(conf) {
+        if (conf.hasOwnProperty('pageNumberLimit')) {
+            this.pageNumberLimit = conf['pageNumberLimit'];
+        } else {
+            logger.info('pageNumberLimit dose not exist!');
+        }
+        if (conf.hasOwnProperty('filename') && conf['filename'] !== '') {
+            this.filename = conf['filename'];
+        } else {
+            logger.info('filename dose valid!');
+        }
         return this;
     }
 
+    url(fn) {
+        if (typeof fn === 'function') {
+            this.makeUrlFn = fn;
+        }
+        if (Object.prototype.toString.call(fn) === '[object Array]') {
+            this.urlPool = fn;
+        }
+        return this;
+    }
 
     /***
      * 初始化战场
      * @returns {Spider}
      */
     init() {
-        this.urlPool = this.makeUrls();
+        this.urlPool = this.makeUrlFn();
         return this;
     }
 
-    makeUrls() {
-        let urlList = [];
-        for (let i = 1; i < this.pageNumberLimit; i++) {
-            urlList.push(`http://www.mp4ba.net/forum-mp4ba-${i}.html`)
-        }
-        return urlList;
-    }
 
-    fetch(url, callBack) {
-        let url = `${url}`;
+    fetch(href, callBack) {
+        href = `${href}`;
         let conf = {
-            url: url,
+            url: href,
             method: "GET",
+            encoding: null,
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36'
             }
         };
-        logger.info(`start access proxy ${url}`);
+        logger.info(`start access proxy ${href}`);
         request(conf, (error, response, body) => {
             if (error) {
-                logger.error(`get page ${url} fail`);
+                logger.error(`get a page ${href} fail!`);
                 return;
             }
-            logger.info(`gotten a page ${url}`);
+            logger.info(`gotten a page ${href} succeed!`);
+            body = iconv.decode(body, 'gb2312');
             callBack(body)
         });
     }
@@ -69,26 +85,42 @@ class Spider {
      * @param html
      */
     parsePage(html) {
-        let $, name, src;
-        $ = cheerio.load(html)
-        name = $('#viewvideo-title').text();
-        src = $('#vid source').attr('src');
-        logger.info(`collected: ${name.replace(/\n/g, '')} -- ${src}`);
-        this.save(name, link);
-        this.fetch(this.videoPageUrlList.pop(), this.parsePage.bind(this))
+        let $, name, hrefList, href;
+        $ = cheerio.load(html, {decodeEntities: false});
+        hrefList = $('#threadlist form table > tbody > tr > th > a');
+
+        hrefList.each((index, element) => {
+            name = $(element).text();
+            href = $(element).attr('href');
+            if (href !== void (0)) {
+                logger.info(`parsed a href ${href}`);
+                this.videoPageUrlList.push(href);
+            } else {
+                logger.error('has no href');
+            }
+        });
+        if (this.urlPool.length !== 0) {
+            this.fetch(this.urlPool.pop(), this.parsePage.bind(this))
+        } else {
+            this.fetch(this.videoPageUrlList.pop(), this.parseMagnet.bind(this))
+        }
+
     }
 
     /***
      * 解析视频页面磁链地址
      */
     parseMagnet(html) {
-        let $, name, src;
-        $ = cheerio.load(html);
-        name = $('#viewvideo-title').text();
-        src = $('#vid source').attr('src');
-        logger.info(`collected: ${name.replace(/\n/g, '')} -- ${src}`);
-        this.save(name, link);
-        this.fetch(this.videoPageUrlList.pop(), this.parsePage.bind(this))
+        let $, name, href;
+        $ = cheerio.load(html, {decodeEntities: false});
+        name = $('#thread_subject').text();
+        href = $('#top > p > a').attr('href');
+        logger.info(`collected: ${name.replace(/\n/g, '')} -- ${href}`);
+        this.save(this.filename, `${name},${href}`);
+        if (this.videoPageUrlList.length !== 0) {
+            this.fetch(this.videoPageUrlList.pop(), this.parsePage.bind(this))
+        }
+        logger.info('done');
     }
 
 
@@ -105,7 +137,11 @@ class Spider {
                     logger.info(`${line} appendTo ${filename} success!`);
                 });
             } else {
-                logger.error(`${filename} does not exist,so create it,and succeed!`);
+                fs.appendFile(filename, ``, 'utf8', (err) => {
+                    if (err) throw err;
+                    logger.error(`${filename} does not exist,so create it,and succeed!`);
+                });
+
             }
         });
     }

@@ -1,5 +1,5 @@
 {
-  "url": "",
-  "pageLimit": 300,
+  "filename": "./magnet.csv",
+  "pageNumberLimit": 300,
   "logLevel": "info"
 }
