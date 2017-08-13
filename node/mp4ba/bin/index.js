@@ -7,18 +7,30 @@ const request = require('request');
 const cheerio = require('cheerio');
 const logger = require('../utils/log');
 
+
 class Spider {
+    /***
+     * define all configure
+     */
     constructor() {
         this.pageUrlStart = '';
         this.pageNumberLimit = '';
         this.urlPool = [];
     }
 
+    /***
+     * 加载配置
+     * @returns {Spider}
+     */
     loadConfig() {
         return this;
     }
 
 
+    /***
+     * 初始化战场
+     * @returns {Spider}
+     */
     init() {
         this.urlPool = this.makeUrls();
         return this;
@@ -67,7 +79,7 @@ class Spider {
     }
 
     /***
-     * 解析视频页面
+     * 解析视频页面磁链地址
      */
     parseMagnet(html) {
         let $, name, src;
@@ -80,6 +92,11 @@ class Spider {
     }
 
 
+    /***
+     * 保存文件
+     * @param filename
+     * @param line
+     */
     save(filename, line) {
         fs.exists(filename, (exists) => {
             if (exists) {
@@ -93,6 +110,9 @@ class Spider {
         });
     }
 
+    /***
+     * 启动
+     */
     run() {
         if (this.urlPool.length === 0) {
             logger.error('urlPool is empty! exited');
