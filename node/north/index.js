@@ -5,4 +5,4 @@
 const Spider = require('./bin/index');
 (new Spider('http://email.91dizhi.at.gmail.com.7h4.space/index.php'))
     .init()
-    // .run();
+    .run();

@@ -4,27 +4,9 @@
 const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
-const log4js = require('log4js');
 const readline = require('readline');
 const uri = require('url');
-
-log4js.configure({
-    categories: {
-        default: {
-            appenders: ['spider', 'out'],
-            level: 'info'
-        }
-    },
-    appenders: {
-        out: {type: 'stdout'},
-        spider: {
-            type: 'file',
-            filename: './spider.log'
-        }
-    }
-});
-
-const logger = log4js.getLogger('spider');
+const logger = require('../utils/log');
 
 
 class Spider {
