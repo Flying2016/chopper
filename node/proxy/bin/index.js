@@ -1,30 +1,11 @@
 /**
  * Created by owen-carter on 17/8/9.
  */
+
 const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
-const log4js = require('log4js');
-
-
-log4js.configure({
-    categories: {
-        default: {
-            appenders: ['spider', 'out'],
-            level: 'info'
-        }
-    },
-    appenders: {
-        out: {type: 'stdout'},
-        spider: {
-            type: 'file',
-            filename: './spider.log'
-        }
-    }
-});
-
-const logger = log4js.getLogger('spider');
-
+const logger = require('../utils/log');
 
 class Spider {
     constructor(seedUrl) {
@@ -138,24 +119,6 @@ class Spider {
         let filename = './ip.txt';
         logger.info(`store ${line} to ip.txt`);
         this.save(filename, line)
-    }
-
-
-    /***
-     * 公共的get方法，有一个回掉参数，需要注意，应该做一下回掉函数的有效性判断
-     * @param url {string}
-     * @param cb {function}
-     */
-    fetch(url, cb) {
-        logger.info(`start to fetch ${url}...`);
-        request({url: url}, function (err, res, body) {
-            if (err) {
-                console.log(err)
-            } else {
-                logger.info(`got the page ${url}...`);
-                cb(body)
-            }
-        });
     }
 
 
