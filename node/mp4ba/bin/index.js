@@ -2,22 +2,22 @@
  * Created by owen on 2017/8/12.
  */
 
-const fs = require('fs');
+const fs      = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
-const iconv = require('iconv-lite');
-const logger = require('../utils/log');
+const iconv   = require('iconv-lite');
+const logger  = require('../utils/log');
 
 class Spider {
     /***
      * define all configure
      */
     constructor() {
-        this.filename = './magnet.csv';
-        this.pageNumberLimit = 1;
-        this.urlPool = [];
+        this.filename         = './magnet.csv';
+        this.pageNumberLimit  = 1;
+        this.urlPool          = [];
         this.videoPageUrlList = [];
-        this.makeUrlFn = null;
+        this.makeUrlFn        = null;
     }
 
     /***
@@ -59,12 +59,12 @@ class Spider {
 
 
     fetch(href, callBack) {
-        href = `${href}`;
+        href     = `${href}`;
         let conf = {
-            url: href,
-            method: "GET",
+            url     : href,
+            method  : "GET",
             encoding: null,
-            headers: {
+            headers : {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36'
             }
         };
@@ -80,13 +80,14 @@ class Spider {
         });
     }
 
+
     /***
      * 解析分页页面
      * @param html
      */
     parsePage(html) {
         let $, name, hrefList, href;
-        $ = cheerio.load(html, {decodeEntities: false});
+        $        = cheerio.load(html, {decodeEntities: false});
         hrefList = $('#threadlist form table > tbody > tr > th > a');
 
         hrefList.each((index, element) => {
@@ -112,7 +113,7 @@ class Spider {
      */
     parseMagnet(html) {
         let $, name, href;
-        $ = cheerio.load(html, {decodeEntities: false});
+        $    = cheerio.load(html, {decodeEntities: false});
         name = $('#thread_subject').text();
         href = $('#top > p > a').attr('href');
         logger.info(`collected: ${name.replace(/\n/g, '')} -- ${href}`);

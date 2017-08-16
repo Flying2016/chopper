@@ -44,4 +44,4 @@ describe('sign up', function () {
                 done();
             });
     });
-})
+});
