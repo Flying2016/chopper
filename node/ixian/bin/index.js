@@ -14,10 +14,6 @@ class Spider {
      */
     constructor() {
         this.filename         = './magnet.csv';
-        this.pageNumberLimit  = 1;
-        this.urlPool          = [];
-        this.videoPageUrlList = [];
-        this.makeUrlFn        = null;
     }
 
     /***
@@ -25,26 +21,11 @@ class Spider {
      * @returns {Spider}
      */
     loadConfig(conf) {
-        if (conf.hasOwnProperty('pageNumberLimit')) {
-            this.pageNumberLimit = conf['pageNumberLimit'];
-        } else {
-            logger.info('pageNumberLimit dose not exist!');
-        }
-        if (conf.hasOwnProperty('filename') && conf['filename'] !== '') {
-            this.filename = conf['filename'];
-        } else {
-            logger.info('filename dose valid!');
-        }
+
         return this;
     }
 
     url(fn) {
-        if (typeof fn === 'function') {
-            this.makeUrlFn = fn;
-        }
-        if (Object.prototype.toString.call(fn) === '[object Array]') {
-            this.urlPool = fn;
-        }
         return this;
     }
 
@@ -53,7 +34,6 @@ class Spider {
      * @returns {Spider}
      */
     init() {
-        this.urlPool = this.makeUrlFn();
         return this;
     }
 
