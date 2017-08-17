@@ -19,3 +19,21 @@ function deleteForever(){
 function autoUpdate(){
     printf "start auto task..."
 }
+
+
+function tag(){
+    tagName=${1}
+    tagDescription=${2}
+    printf "make a tag for the repo..."
+    printf "show history tags..."
+    git tag
+    git tag -a "${tagName}" -m "${tagDescription}"
+    printf "push tags into github ..."
+    git push origin --tags
+}
+
+
+
+function main(){
+
+}
