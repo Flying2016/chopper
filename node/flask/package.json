@@ -1,0 +1,24 @@
+{
+  "name": "myexpress",
+  "version": "0.0.0",
+  "description": "This is a demo to follow express framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "likelight",
+  "devDependencies": {
+    "mocha": "^1.18.2",
+    "chai": "^1.9.1",
+    "supertest": "^0.10.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "accepts": "^1.0.1",
+    "buffer-crc32": "^0.2.1",
+    "express-di": "^4.0.0",
+    "methods": "^0.1.0",
+    "mime": "^1.2.11",
+    "range-parser": "^1.0.0"
+  }
+}
