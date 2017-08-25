@@ -8,10 +8,11 @@ cat <<EOF
 
 EOF
 
-installNode(){
+installNodeByRepo(){
     echo "=======install node========"
     rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    sync
+    yum -y update
+    yum -y groupinstall "Development Tools"
     yum install git -y
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
     . ~/.bashrc
@@ -32,6 +33,18 @@ installNode(){
     npm install npm -g
     # 安装常见需要安装的工具
     npm install PM2 gulp mocha karma jsmine nightwatch jshint node-gyp webpack less babel express-generator -g
+}
+
+installNodeBySource(){
+    yum -y update
+    yum -y groupinstall "Development Tools"
+    cd /usr/src
+    wget http://nodejs.org/dist/v0.10.18/node-v0.10.18.tar.gz
+    tar zxf node-v0.10.18.tar.gz
+    cd node-v0.10.18
+    ./configure
+    make
+    make install
 }
 
 installJava(){
