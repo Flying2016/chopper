@@ -12,8 +12,7 @@ projectList=(
     "patent"
     "pics"
 )
-logFile=./update.log
-exec 2>${logFile} >${logFile} 2>&1 >&1
+exec 2>&1 >&1
 
 
 function updateMyProject(){
