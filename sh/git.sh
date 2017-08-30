@@ -33,6 +33,13 @@ function tag(){
 }
 
 
+function branch(){
+    git branch develop
+    git checkout develop
+    git push origin develop
+}
+
+
 
 function main(){
 

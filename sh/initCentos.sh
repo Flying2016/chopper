@@ -8,10 +8,11 @@ cat <<EOF
 
 EOF
 
-installNode(){
+installNodeByRepo(){
     echo "=======install node========"
     rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    sync
+    yum -y update
+    yum -y groupinstall "Development Tools"
     yum install git -y
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
     . ~/.bashrc
@@ -29,9 +30,22 @@ installNode(){
     npm config set registry http://registry.npm.taobao.org
     npm install -g cnpm --registry=https://registry.npm.taobao.org
     # 更新npm
-    npm install npm -g
+    cnpm install npm -g
     # 安装常见需要安装的工具
-    npm install PM2 gulp mocha karma jsmine nightwatch jshint node-gyp webpack less babel express-generator -g
+    cnpm install PM2 gulp mocha karma jsmine nightwatch jshint node-gyp webpack less babel express-generator -g
+    cnpm install
+}
+
+installNodeBySource(){
+    yum -y update
+    yum -y groupinstall "Development Tools"
+    cd /usr/src
+    wget http://nodejs.org/dist/v0.10.18/node-v0.10.18.tar.gz
+    tar zxf node-v0.10.18.tar.gz
+    cd node-v0.10.18
+    ./configure
+    make
+    make install
 }
 
 installJava(){
@@ -46,6 +60,15 @@ installPython(){
 
 installGo(){
     echo $0
+    wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
+    tar -C /usr/local -xzf go1.9.linux-amd64.tar.gz
+    mkdir ~/go1.9
+    local magic='
+    export PATH=$PATH:/usr/local/go/bin
+    export GOROOT=$HOME/go1.9
+    export PATH=$PATH:$GOROOT/bin
+    '
+    ehco ${magic} ~.bashrc
 }
 
 installNginx(){
@@ -103,18 +126,18 @@ installRabbitMq(){
 installMongodb(){
     echo "=============install mongodb============"
     echo "http://www.jianshu.com/p/65c220653afd"
-    repo="[mongodb-org-3.4]
-          name=MongoDB Repository
-          baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
-          gpgcheck=1
-          enabled=1
-          gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc"
+    repo='[mongodb-org-3.4]\n
+    name=MongoDB Repository\n
+    baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/\n
+    gpgcheck=1\n
+    enabled=1\n
+    gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc\n'
     touch /etc/yum.repos.d/mongodb-org-3.4.repo
     echo ${repo} > /etc/yum.repos.d/mongodb-org-3.4.repo
     yum -y install mongodb-org mongodb-org-server
-    systemctl enable mongodb
-    systemctl start mongodb
-    systemctl status mongodb
+    systemctl enable mongod
+    systemctl start mongod
+    systemctl status mongod
 }
 
 installUtils(){
