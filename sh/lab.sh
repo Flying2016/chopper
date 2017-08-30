@@ -29,7 +29,7 @@ function updateMyProject(){
 
 
 
-while true:
+while true
 do
     printf "start to update all my project"
     updateMyProject
