@@ -12,6 +12,9 @@ projectList=(
     "patent"
     "pics"
 )
+logFile=./update.log
+exec 2>${logFile} >${logFile}
+
 
 function updateMyProject(){
     printf "start update my project"
@@ -25,4 +28,10 @@ function updateMyProject(){
 }
 
 
-updateMyProject
+
+while true:
+do
+    printf "start to update all my project"
+    updateMyProject
+    sleep 60
+done
