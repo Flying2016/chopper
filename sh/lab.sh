@@ -17,7 +17,7 @@ function updateMyProject(){
     printf "start update my project"
     for project in ${projectList[@]};
     do
-        printf "[project] : ${projec}"
+        printf "[project] : ${project}"
         cd ${workDirectory}${project}
         git pull origin master
     done
