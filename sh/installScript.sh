@@ -39,6 +39,22 @@ function installNode(){
     npm install PM2 node-gyp express -g
 }
 
+InstallJRE()
+{
+	local filename=/etc/profile
+	tmpnum=`sed -n -e '/JAVA_HOME/=' ${filename}`
+	if [ -z "$tmpnum" ];then
+		#sed -i "/JAVA_HOME/d" ${filename}
+
+		echo "export JAVA_HOME=/opt/jre" >> ${filename}
+		echo "export CLASS_PATH=\$JAVA_HOME/lib" >> ${filename}
+		echo "export PATH=\$PATH:\$JAVA_HOME/bin" >> ${filename}
+	fi
+
+	source /etc/profile
+}
+
+
 installNginx(){
     echo "===============install nginx========="
     yum install gcc-c++  pcre pcre-devel  zlib zlib-devel  openssl openssl--devel  -y
