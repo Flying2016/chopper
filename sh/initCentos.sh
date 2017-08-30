@@ -126,18 +126,18 @@ installRabbitMq(){
 installMongodb(){
     echo "=============install mongodb============"
     echo "http://www.jianshu.com/p/65c220653afd"
-    repo='[mongodb-org-3.4]
-          name=MongoDB Repository
-          baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
-          gpgcheck=1
-          enabled=1
-          gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc'
+    repo='[mongodb-org-3.4]\n
+    name=MongoDB Repository\n
+    baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/\n
+    gpgcheck=1\n
+    enabled=1\n
+    gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc\n'
     touch /etc/yum.repos.d/mongodb-org-3.4.repo
     echo ${repo} > /etc/yum.repos.d/mongodb-org-3.4.repo
     yum -y install mongodb-org mongodb-org-server
-    systemctl enable mongodb
-    systemctl start mongodb
-    systemctl status mongodb
+    systemctl enable mongod
+    systemctl start mongod
+    systemctl status mongod
 }
 
 installUtils(){
