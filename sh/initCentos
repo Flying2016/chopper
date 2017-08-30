@@ -60,6 +60,15 @@ installPython(){
 
 installGo(){
     echo $0
+    wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
+    tar -C /usr/local -xzf go1.9.linux-amd64.tar.gz
+    mkdir ~/go1.9
+    local magic='
+    export PATH=$PATH:/usr/local/go/bin
+    export GOROOT=$HOME/go1.9
+    export PATH=$PATH:$GOROOT/bin
+    '
+    ehco ${magic} ~.bashrc
 }
 
 installNginx(){
