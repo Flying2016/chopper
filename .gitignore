@@ -1,6 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
-node/spider/node_modules/
 /.vscode/
 .DS_Store
 node_modules/
