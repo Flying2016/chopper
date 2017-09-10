@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# author : owen-carter
+# author        : owen-carter
+# description   : build ssh tunnel
 
 function buildTarget(){
     printf ""
@@ -20,12 +21,7 @@ function buildOperator(){
 }
 
 
-cmdList=( "dumpLocalhost" "initRemote" "exit" )
-
-checkInstalled "mysql"
-checkInstalled "mysqldump"
-checkInstalled "dialog"
-checkInstalled "whiptail"
+cmdList=( "buildTarget" "buildBridge" "exit" )
 
 
 OPTION=$(whiptail --title "Test Menu Dialog" --menu "Choose your option" 15 60 4 \
