@@ -1,4 +1,4 @@
-# Chopper [![Build Status](https://www.travis-ci.org/owen-carter/chopper.svg?branch=master)](https://www.travis-ci.org/owen-carter/chopper)
+# Chopper
 > 一个shell集合库
 
 
