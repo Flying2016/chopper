@@ -2,7 +2,7 @@
 # author : owen-carter
 # usage  : auto clone github repo
 
-declare repos
+workDirectory=~/workspace/
 repos=`curl -s  https://api.github.com/users/owen-carter/repos | grep '"name"' | sed s/[[:space:]]//g | sed s/name//g | sed s/\"//g | sed s/\,//g | sed s/\://g`
 
 initRepos(){
