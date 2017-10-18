@@ -31,6 +31,8 @@ installNodeByRepo(){
     npm install -g cnpm --registry=https://registry.npm.taobao.org
     # 更新npm
     cnpm install npm -g
+    # install the window compile tools
+    # npm install --global --production windows-build-tools
     # 安装常见需要安装的工具
     cnpm install PM2 gulp mocha karma jsmine nightwatch jshint node-gyp webpack less babel express-generator -g
     cnpm install
