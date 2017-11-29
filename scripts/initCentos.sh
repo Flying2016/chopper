@@ -157,6 +157,13 @@ installRust(){
     source ~/.bashrc
 }
 
+installRedis(){
+    echo "=======install redis======="
+    sudo yum install epel-release
+    sudo yum install redis
+    sudo systemctl start redis
+}
+
 installPerl(){
     echo "==============start install perl ==================="
     cd ~
@@ -285,6 +292,7 @@ cmdList=(
 "installRabbitMq"
 "installMongodb"
 "installPerl"
+"installRedis"
 "installRust"
 "open80"
 "clearLog"
